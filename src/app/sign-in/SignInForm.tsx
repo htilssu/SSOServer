@@ -1,17 +1,18 @@
 'use client'
 
-import React from 'react';
+import React, {useState} from 'react';
 import EmailInput from "@/components/EmailInput";
-import {Checkbox, PasswordInput} from "@mantine/core";
+import {Button, Checkbox, PasswordInput} from "@mantine/core";
 import Link from "next/link";
 import {isEmail, useForm} from "@mantine/form";
 import {getPasswordErrorMessage} from "@/validators/password_validator";
+import {useDisclosure} from "@mantine/hooks";
+import {ErrorModel} from "@/app/dtos/error.model";
 
-interface SignInFormProps {
-    handleSignIn: (value: { remember: boolean; password: string; email: string }) => Promise<any>
-}
 
-const SignInForm = ({handleSignIn}: SignInFormProps) => {
+const SignInForm = () => {
+    const [loading, {open, close}] = useDisclosure(false);
+    const [loginStatus, setLoginStatus] = useState<ErrorModel | null>(null)
     const form = useForm({
         mode: "uncontrolled",
         initialValues: {
@@ -31,12 +32,17 @@ const SignInForm = ({handleSignIn}: SignInFormProps) => {
         if (hasErrors) {
             return;
         }
-        await handleSignIn(value);
+        setLoginStatus(null)
+        open();
         const res = await fetch("/v1/sign-in", {
             mode: 'same-origin',
             body: JSON.stringify(value),
             method: 'POST',
         })
+        close();
+        if (!res.ok) {
+            setLoginStatus(await res.json())
+        }
     }
 
 
@@ -71,12 +77,17 @@ const SignInForm = ({handleSignIn}: SignInFormProps) => {
                     </Link>
                 </div>
             </div>
+            <div className={'text-red-600 mt-2 min-h-5 text-sm'}>
+                {loginStatus?.msg}
+            </div>
 
-            <div className="mt-12">
-                <button type="submit"
+            <div className="mt-5">
+                <Button loading={loading} loaderProps={{
+                    type: "oval",
+                }} fullWidth={true} size={"md"} type="submit"
                         className="w-full py-2.5 px-4 text-sm font-semibold tracking-wider rounded-full text-white bg-gray-800 hover:bg-[#222] focus:outline-none">
                     Đăng nhập
-                </button>
+                </Button>
                 <p className="text-gray-800 text-sm text-center mt-6">Không có tài khoản? <Link
                     href="/sign-up"
                     className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Đăng ký</Link></p>

@@ -3,32 +3,56 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["tracing"]
-}
-
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["tracing"]
+
+}
+
 model Account {
-  id       String  @id @default(cuid()) @map("_id")
-  email    String  @unique
-  password String
-  username String? @unique
-  user     User    @relation(fields: [userId], references: [id])
-  userId   String
+  id        String   @id @default(cuid()) @map("_id")
+  email     String   @unique
+  password  String
+  userId    String
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id])
+  Partner   Partner  @relation(fields: [partnerId], references: [id])
+  partnerId String
 }
 
 model User {
-  id          String    @id @default(cuid()) @map("_id")
+  id          String        @id @default(cuid()) @map("_id")
   firstName   String
   lastName    String
-  phoneNumber String    @unique
-  accountId   String?
+  updatedAt   DateTime      @updatedAt
+  username    String?       @unique
+  phoneNumber String        @unique
   metadata    Json?
+  UserPartner UserPartner[]
   Account     Account[]
+}
+
+model Partner {
+  id          String        @id @default(cuid()) @map("_id")
+  name        String
+  updatedAt   DateTime      @updatedAt
+  UserPartner UserPartner[]
+  Account     Account[]
+}
+
+model UserPartner {
+  id        String   @id @default(cuid()) @map("_id")
+  userId    String
+  createdAt DateTime @default(now())
+  partnerId String
+  User      User     @relation(fields: [userId], references: [id])
+  Partner   Partner  @relation(fields: [partnerId], references: [id])
+
+  @@unique([userId, partnerId], name: "user_partner_unique")
 }

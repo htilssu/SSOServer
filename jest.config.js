@@ -5,4 +5,7 @@ module.exports = {
     '^.+.tsx?$': ['ts-jest', {}],
   },
   preset: 'ts-jest',
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
 };
