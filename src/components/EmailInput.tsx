@@ -1,9 +1,9 @@
 'use client';
 
-import {TextInput} from '@mantine/core';
+import {TextInput, TextInputProps} from '@mantine/core';
 import React from 'react';
 
-interface EmailInputProps {
+interface EmailInputProps extends TextInputProps{
     size?: 'sm' | 'md' | 'lg';
     placeholder?: string;
     required?: boolean;

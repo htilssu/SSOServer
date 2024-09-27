@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import SubmitOption from './SubmitOption';
 import UserInfoCard from "@/app/sign-in/UserInfoCard";

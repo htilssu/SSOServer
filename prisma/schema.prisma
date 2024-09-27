@@ -25,33 +25,35 @@ model Account {
 }
 
 model User {
-  id          String        @id @default(cuid()) @map("_id")
+  id          String    @id @default(cuid()) @map("_id")
   firstName   String
   lastName    String
-  updatedAt   DateTime      @updatedAt
-  username    String?       @unique
-  phoneNumber String        @unique
+  updatedAt   DateTime  @updatedAt
+  username    String?   @unique
+  phoneNumber String    @unique
   metadata    Json?
-  UserPartner UserPartner[]
   Account     Account[]
 }
 
 model Partner {
-  id          String        @id @default(cuid()) @map("_id")
-  name        String
-  webUrl      String[]
-  updatedAt   DateTime      @updatedAt
-  UserPartner UserPartner[]
-  Account     Account[]
+  id             String           @id @default(cuid()) @map("_id")
+  name           String
+  webUrl         String[]
+  updatedAt      DateTime         @updatedAt
+  Account        Account[]
+  PartnerService PartnerService[]
 }
 
-model UserPartner {
-  id        String   @id @default(cuid()) @map("_id")
-  userId    String
-  createdAt DateTime @default(now())
-  partnerId String
-  User      User     @relation(fields: [userId], references: [id])
-  Partner   Partner  @relation(fields: [partnerId], references: [id])
+model Service {
+  id             String           @id @default(cuid()) @map("_id")
+  name           String
+  PartnerService PartnerService[]
+}
 
-  @@unique([userId, partnerId], name: "user_partner_unique")
+model PartnerService {
+  id        String  @id @default(cuid()) @map("_id")
+  Service   Service @relation(fields: [serviceId], references: [id])
+  Partner   Partner @relation(fields: [partnerId], references: [id])
+  partnerId String
+  serviceId String
 }

@@ -5,11 +5,11 @@ import EmailInput from "@/components/EmailInput";
 import {Button, Checkbox, PasswordInput} from "@mantine/core";
 import Link from "next/link";
 import {isEmail, useForm} from "@mantine/form";
-import {getPasswordErrorMessage} from "@/validators/password_validator";
 import {useDisclosure} from "@mantine/hooks";
 import {ErrorModel} from "@/app/dtos/error.model";
 import {Prisma} from '@prisma/client';
 import {DefaultArgs, GetResult} from '@prisma/client/runtime/library';
+import {passwordValidator} from "@/validators/password.validator";
 
 
 interface SignInFormProps {
@@ -30,7 +30,7 @@ const SignInForm = ({partner}: SignInFormProps) => {
         },
         validate: {
             email: isEmail("Email không hợp lệ"),
-            password: getPasswordErrorMessage
+            password: passwordValidator
         }
     })
 

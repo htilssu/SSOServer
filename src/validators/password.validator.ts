@@ -1,4 +1,4 @@
-export function getPasswordErrorMessage(password: string) {
+export function passwordValidator(password: string) {
 
     if (password.length === 0) {
         return "Mật khẩu không được để trống";
@@ -21,4 +21,14 @@ export function getPasswordErrorMessage(password: string) {
     if (!/[^a-zA-Z0-9]/.test(password)) {
         return "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt";
     }
+
+    return null;
+}
+
+export function confirmPasswordValidator(value: string, values: { password: string }) {
+    if (value !== values.password) {
+        return "Mật khẩu không khớp";
+    }
+
+    return null;
 }
