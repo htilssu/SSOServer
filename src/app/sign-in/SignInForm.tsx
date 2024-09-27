@@ -8,9 +8,17 @@ import {isEmail, useForm} from "@mantine/form";
 import {getPasswordErrorMessage} from "@/validators/password_validator";
 import {useDisclosure} from "@mantine/hooks";
 import {ErrorModel} from "@/app/dtos/error.model";
+import {Prisma} from '@prisma/client';
+import {DefaultArgs, GetResult} from '@prisma/client/runtime/library';
 
 
-const SignInForm = () => {
+interface SignInFormProps {
+    partner?: Prisma.Prisma__PartnerClient<GetResult<Prisma.$PartnerPayload<DefaultArgs>, {
+        where: { webUrl: { hasSome: string[] } }
+    }, "findFirst"> | null, null, DefaultArgs>
+}
+
+const SignInForm = ({partner}: SignInFormProps) => {
     const [loading, {open, close}] = useDisclosure(false);
     const [loginStatus, setLoginStatus] = useState<ErrorModel | null>(null)
     const form = useForm({

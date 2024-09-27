@@ -8,11 +8,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["tracing"]
-
 }
 
 model Account {
@@ -41,6 +39,7 @@ model User {
 model Partner {
   id          String        @id @default(cuid()) @map("_id")
   name        String
+  webUrl      String[]
   updatedAt   DateTime      @updatedAt
   UserPartner UserPartner[]
   Account     Account[]
