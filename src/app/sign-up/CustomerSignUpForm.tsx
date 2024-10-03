@@ -9,19 +9,14 @@ import {DateInput} from '@mantine/dates';
 import {dobValidator} from "@/validators/dob.validator";
 import {useDisclosure} from "@mantine/hooks";
 import {IconAt, IconCalendar, IconKey} from "@tabler/icons-react";
-import {Service} from "@prisma/client";
-import PartnerCombobox from "@/app/sign-up/ServiceCombobox";
 
 const now = new Date();
 const minDate = new Date(now.getFullYear() - 18, now.getMonth(), now.getDate());
 
-interface SignUpFormProps {
-    services: Service[]
-}
 
-const SignUpForm = ({services}: SignUpFormProps) => {
+const CustomerSignUpForm = () => {
     const form = useForm({
-        mode: "uncontrolled",
+        mode: "controlled",
         initialValues: {
             email: '',
             password: '',
@@ -30,7 +25,6 @@ const SignUpForm = ({services}: SignUpFormProps) => {
             username: '',
             phoneNumber: '',
             term: false,
-            partner: '',
         },
 
         validate: {
@@ -44,23 +38,21 @@ const SignUpForm = ({services}: SignUpFormProps) => {
         }
     });
 
+
     const [visible, {open, close}] = useDisclosure(false);
 
     function handleSignUp(values: typeof form.values) {
         open();
 
-        // TODO: Implement sign-up logic here
+
         setTimeout(() => {
             close();
         }, 2000)
     }
 
-    function setPartner(partnerId: string) {
-        form.setFieldValue('partner', partnerId);
-    }
 
     return (
-        <div className='w-full bg-white px-4 py-5 rounded-xl sm:w-1/2  lg:w-4/12'>
+        <div className='w-full bg-opacity-50 backdrop-blur bg-white px-6 py-10 rounded-xl sm:w-1/2  lg:w-4/12'>
             <h2 className={'text-2xl'}>Đăng ký tài khoản Oggy Club</h2>
             <p className={'text-sm mt-1 text-gray-500'}>Hãy đăng ký tài khoản Oggy Club để kết nối với các dịch vụ của
                 chúng tôi 1 cách
@@ -74,38 +66,37 @@ const SignUpForm = ({services}: SignUpFormProps) => {
                     <div className='w-full mt-1'>
 
                         <InputWrapper label={"Email"} required>
-                            <EmailInput leftSection={<IconAt size={16}/>}  {...form.getInputProps('email')} />
+                            <EmailInput size={'md'} placeholder={'Nhập email'}
+                                        leftSection={<IconAt size={20}/>}  {...form.getInputProps('email')} />
                         </InputWrapper>
                     </div>
                     <div className='w-full mt-1'>
                         <InputWrapper label={"Mật khẩu"} required>
-                            <PasswordInput leftSection={<IconKey size={16}/>} {...form.getInputProps('password')} />
+                            <PasswordInput size={'md'} placeholder={'Nhập mật khẩu'}
+                                           leftSection={<IconKey size={20}/>} {...form.getInputProps('password')} />
                         </InputWrapper>
                     </div>
                     <div className='w-full mt-1'>
                         <InputWrapper label={"Nhập lại mật khẩu"} required>
-                            <PasswordInput leftSection={<IconKey size={16}/>} {...form.getInputProps(
+                            <PasswordInput size={'md'} placeholder={'Nhập lại mật khẩu'}
+                                           leftSection={<IconKey size={20}/>} {...form.getInputProps(
                                 'confirmPassword')} />
                         </InputWrapper>
                     </div>
                     <div className='w-full mt-1'>
                         <InputWrapper label={"Ngày sinh"} required>
-                            <DateInput leftSection={<IconCalendar size={16}/>} maxDate={minDate} required
+                            <DateInput size={'md'} placeholder={'Chọn ngày sinh'}
+                                       leftSection={<IconCalendar size={20}/>} maxDate={minDate} required
                                        valueFormat={'DD/MM/YYYY'}  {...form.getInputProps('dob')} />
-                        </InputWrapper>
-                    </div>
-                    <div className='w-full mt-1'>
-                        <InputWrapper label={"Dịch vụ"} required>
-                            <PartnerCombobox services={services} setService={setPartner}/>
                         </InputWrapper>
                     </div>
                     <div className='w-full mt-3 flex items-center justify-start'>
                         <Checkbox label={"Tôi đồng ý với các điều khoản của Oggy Club"} id={'term'}
-                                  size={'xs'} {...form.getInputProps('term')} />
+                                  size={'sm'} {...form.getInputProps('term')} />
                     </div>
                 </Box>
                 <div className='mt-5'>
-                    <Button fullWidth type={"submit"}>
+                    <Button fullWidth size={'md'} type={"submit"}>
                         Đăng ký
                     </Button>
                 </div>
@@ -114,4 +105,4 @@ const SignUpForm = ({services}: SignUpFormProps) => {
     );
 };
 
-export default SignUpForm;
+export default CustomerSignUpForm;

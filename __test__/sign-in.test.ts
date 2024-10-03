@@ -1,4 +1,4 @@
-import {hashPassword, verifyPassword} from "@/app/services/encoder";
+import {hashPassword, verifyPassword} from "@/services/password.service.ts";
 
 let user: { email: string, password: string };
 

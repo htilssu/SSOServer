@@ -1,12 +1,13 @@
 import {NextRequest, NextResponse} from "next/server";
-import {jwtSign} from "@/app/services/jwt";
-import {verifyPassword} from "@/app/services/encoder";
+import {jwtSign} from "@/services/jwt.service.ts";
+import {verifyPassword} from "@/services/password.service.ts";
 import prisma from "@/prisma";
-import {getClaim} from "@/app/services/token-claim";
-import {ErrorModel} from "@/app/dtos/error.model";
+import {getClaim} from "@/services/token-claim.service.ts";
+import {ErrorModel} from "@/dtos/error.model";
 
 export type SignInBody = {
     email: string
+    username: string
     password: string
     remember: boolean
 }
@@ -22,7 +23,6 @@ export async function POST(request: NextRequest) {
             Partner: true,
             User: true
         }
-
     })
 
     if (!account) {

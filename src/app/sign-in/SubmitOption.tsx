@@ -21,7 +21,7 @@ const SubmitOption = ({cancel, accept}: SubmitOptionProps) => {
             <Button
                 onClick={accept}
                 fullWidth={true}
-                color={'green'}
+                color={'blue'}
                 size={'md'}
             >
                 Tiếp tục

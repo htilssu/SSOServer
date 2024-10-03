@@ -1,0 +1,4 @@
+### GET request to example server
+POST https://localhost:3000/v1/sign-in
+
+###

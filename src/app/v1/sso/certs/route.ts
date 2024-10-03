@@ -1,5 +1,5 @@
 import {NextResponse} from "next/server";
-import {jwk} from "@/app/services/jwt";
+import {jwk} from "@/services/jwt.service.ts";
 
 export async function GET(request: Request) {
     const {searchParams} = new URL(request.url);

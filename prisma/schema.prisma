@@ -14,20 +14,26 @@ generator client {
 }
 
 model Account {
-  id        String   @id @default(cuid()) @map("_id")
-  email     String   @unique
-  password  String
-  userId    String
-  createdAt DateTime @default(now())
-  User      User     @relation(fields: [userId], references: [id])
-  Partner   Partner  @relation(fields: [partnerId], references: [id])
-  partnerId String
+  id          String   @id @default(cuid()) @map("_id")
+  email       String   @unique
+  password    String
+  userId      String?
+  accountType String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User?    @relation(fields: [userId], references: [id])
+  Partner     Partner? @relation(fields: [partnerId], references: [id])
+  partnerId   String?
+
+  @@unique([email, accountType])
 }
 
 model User {
   id          String    @id @default(cuid()) @map("_id")
   firstName   String
   lastName    String
+  dob         DateTime
+  createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   username    String?   @unique
   phoneNumber String    @unique
@@ -37,8 +43,10 @@ model User {
 
 model Partner {
   id             String           @id @default(cuid()) @map("_id")
+  phoneNumber    String           @unique
   name           String
-  webUrl         String[]
+  metadata       Json?
+  createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
   Account        Account[]
   PartnerService PartnerService[]
@@ -47,6 +55,11 @@ model Partner {
 model Service {
   id             String           @id @default(cuid()) @map("_id")
   name           String
+  description    String
+  metadata       Json?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  website        String?
   PartnerService PartnerService[]
 }
 
