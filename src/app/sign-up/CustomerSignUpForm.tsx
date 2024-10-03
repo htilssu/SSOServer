@@ -6,12 +6,13 @@ import {confirmPasswordValidator, passwordValidator} from "@/validators/password
 import EmailInput from "@/components/EmailInput";
 import {Box, Button, Checkbox, InputWrapper, LoadingOverlay, PasswordInput} from "@mantine/core";
 import {DateInput} from '@mantine/dates';
-import {dobValidator} from "@/validators/dob.validator";
+import {dobValidator, maxAge, minAge} from "@/validators/dob.validator";
 import {useDisclosure} from "@mantine/hooks";
 import {IconAt, IconCalendar, IconKey} from "@tabler/icons-react";
 
 const now = new Date();
-const minDate = new Date(now.getFullYear() - 18, now.getMonth(), now.getDate());
+const maxDate = new Date(now.getFullYear() - minAge, now.getMonth(), now.getDate());
+const minDate = new Date(now.getFullYear() - maxAge, now.getMonth(), now.getDate());
 
 
 const CustomerSignUpForm = () => {
@@ -21,7 +22,7 @@ const CustomerSignUpForm = () => {
             email: '',
             password: '',
             confirmPassword: '',
-            dob: minDate,
+            dob: maxDate,
             username: '',
             phoneNumber: '',
             term: false,
@@ -86,7 +87,7 @@ const CustomerSignUpForm = () => {
                     <div className='w-full mt-1'>
                         <InputWrapper label={"Ngày sinh"} required>
                             <DateInput size={'md'} placeholder={'Chọn ngày sinh'}
-                                       leftSection={<IconCalendar size={20}/>} maxDate={minDate} required
+                                       leftSection={<IconCalendar size={20}/>} minDate={minDate} maxDate={maxDate} required
                                        valueFormat={'DD/MM/YYYY'}  {...form.getInputProps('dob')} />
                         </InputWrapper>
                     </div>

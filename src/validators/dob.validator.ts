@@ -1,3 +1,6 @@
+export const maxAge = 100;
+export const minAge = 18;
+
 export function isEighteenOrOlder(date: string | Date): boolean {
     if (typeof date === "string") {
         date = new Date(date);
@@ -13,8 +16,8 @@ export function isEighteenOrOlder(date: string | Date): boolean {
     return date <= eighteenYearsAgo;
 }
 
-export function dobValidator(data: string| Date) {
-    if (!isEighteenOrOlder(data)){
+export function dobValidator(data: string | Date) {
+    if (!isEighteenOrOlder(data)) {
         return "Bạn phải đủ 18 tuổi trở lên";
     }
 
