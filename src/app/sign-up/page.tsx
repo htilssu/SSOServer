@@ -2,13 +2,13 @@ import React from 'react';
 import '@mantine/dates/styles.css';
 import CustomerSignUpForm from "@/app/sign-up/CustomerSignUpForm.tsx";
 import Image from "next/image";
-import Field from "../../../public/field.png";
+import Field from "../../../public/backgrounds/field.png";
 
 const Page = async () => {
 
     return (
 
-        <div className={"relative flex justify-center items-center font-[sans-serif] h-full min-h-screen p-4"}>
+        <div className={"relative flex justify-center items-center h-full min-h-screen p-4"}>
             <Image
                 className="absolute w-full h-full"
                 src={Field} alt={"123"} priority placeholder={"blur"}>
@@ -18,8 +18,7 @@ const Page = async () => {
                 <CustomerSignUpForm/>
             </div>
         </div>
-    )
-        ;
+    );
 }
 
 export default Page;

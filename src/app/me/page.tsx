@@ -12,12 +12,15 @@
  *  ******************************************************
  */
 
-import {SignUpDto} from "@/app/v1/sign-up/route.ts";
+import React from 'react';
 
-export async function signUpUser(data: SignUpDto) {
-    console.log(data)
-    return await fetch("/v1/sign-up", {
-        method: "POST",
-        body: JSON.stringify(data),
-    })
-}
+const Page = () => {
+    return (
+        <div>
+
+        </div>
+    );
+};
+
+export default Page;
+

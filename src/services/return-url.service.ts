@@ -12,12 +12,6 @@
  *  ******************************************************
  */
 
-import {SignUpDto} from "@/app/v1/sign-up/route.ts";
-
-export async function signUpUser(data: SignUpDto) {
-    console.log(data)
-    return await fetch("/v1/sign-up", {
-        method: "POST",
-        body: JSON.stringify(data),
-    })
+export async function saveReturnUrl(returnUrl: string) {
+    
 }

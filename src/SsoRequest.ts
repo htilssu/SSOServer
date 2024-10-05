@@ -12,12 +12,9 @@
  *  ******************************************************
  */
 
-import {SignUpDto} from "@/app/v1/sign-up/route.ts";
+import {NextRequest} from "next/server";
 
-export async function signUpUser(data: SignUpDto) {
-    console.log(data)
-    return await fetch("/v1/sign-up", {
-        method: "POST",
-        body: JSON.stringify(data),
-    })
+export declare class SsoRequest extends NextRequest {
+    claim: any
 }
+

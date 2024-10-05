@@ -2,8 +2,8 @@ import {NextRequest, NextResponse} from "next/server";
 import {jwtSign} from "@/services/jwt.service.ts";
 import {verifyPassword} from "@/services/password.service.ts";
 import prisma from "@/prisma";
-import {getClaim} from "@/services/token-claim.service.ts";
 import {ErrorModel} from "@/dtos/error.model";
+import {removeNullProperties} from "@/utils/object.util.tsx";
 
 export type SignInBody = {
     email: string
@@ -38,9 +38,11 @@ export async function POST(request: NextRequest) {
         });
     }
 
-    const tokenClaim = await getClaim(account);
 
-    const token = await jwtSign(tokenClaim);
+    const token = await jwtSign(removeNullProperties({
+        ...account,
+        role: account.userId ? "user" : "partner"
+    }));
     return NextResponse.json({}, {
         status: 200,
         headers: {

@@ -3,31 +3,22 @@ import '@mantine/dates/styles.css';
 import prisma from "@/prisma";
 import {Service} from "@prisma/client";
 import PartnerSignUpForm from "@/app/sign-up/PartnerSignUpForm.tsx";
+import Image from "next/image";
+import Field from "../../../../public/backgrounds/field.png";
 
 const Page = async () => {
-    let partner = await prisma.service.findMany();
-    partner = [{
-        "id": "1",
-        name: "Oggy 5",
-    }, {
-        "id": "2",
-        name: "Oggy 4",
-    }, {
-        "id": "3",
-        name: "Oggy 3",
-    }, {
-        "id": "4",
-        name: "Oggy 1",
-    }] as Service[];
+    let services: Service[] = await prisma.service.findMany();
 
     return (
-        <div className={'flex min-h-screen w-screen'} style={{
-            backgroundImage: 'url(https://readymadeui.com/background-image.webp)',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover'
-        }}>
-            <div className={'flex justify-center items-center w-full'}>
-                <PartnerSignUpForm services={partner}/>
+        <div className={"relative flex justify-center items-center h-full min-h-screen p-4"}>
+            <Image
+                className="absolute w-full h-full"
+                quality={100}
+                src={Field} alt={"123"} priority placeholder={"blur"}>
+
+            </Image>
+            <div className={'flex justify-center z-10 items-center w-full'}>
+                <PartnerSignUpForm services={services}/>
             </div>
         </div>
     );

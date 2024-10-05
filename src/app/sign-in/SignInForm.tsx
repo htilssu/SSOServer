@@ -14,7 +14,7 @@ import {signIn, SignInData} from "@/services/sign-in.service.ts";
 
 
 interface SignInFormProps {
-    service: Service
+    service?: Service
 }
 
 const SignInForm = ({service}: SignInFormProps) => {
@@ -71,7 +71,7 @@ const SignInForm = ({service}: SignInFormProps) => {
                     </label>
                 </div>
                 <div>
-                    <Link href="/forgot-password"
+                    <Link href="/password/forgot"
                           className="text-blue-600 text-sm font-semibold hover:underline">
                         Quên mật khẩu?
                     </Link>

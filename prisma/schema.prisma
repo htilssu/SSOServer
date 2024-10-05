@@ -32,11 +32,12 @@ model User {
   id          String    @id @default(cuid()) @map("_id")
   firstName   String
   lastName    String
+  avatar      String?
   dob         DateTime
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   username    String?   @unique
-  phoneNumber String    @unique
+  phoneNumber String?   @unique
   metadata    Json?
   Account     Account[]
 }
@@ -45,6 +46,9 @@ model Partner {
   id             String           @id @default(cuid()) @map("_id")
   phoneNumber    String           @unique
   name           String
+  apiKeys        String[]
+  address        String
+  avatar         String?
   metadata       Json?
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
@@ -69,4 +73,13 @@ model PartnerService {
   Partner   Partner @relation(fields: [partnerId], references: [id])
   partnerId String
   serviceId String
+}
+
+model TempSession {
+  id        String   @id @default(cuid()) @map("_id")
+  session   String
+  returnUrl String?
+  expiredAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
