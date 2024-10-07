@@ -1,3 +1,5 @@
+'use server'
+
 import Field from '../../../public/backgrounds/field.png'
 import {cookies, headers} from "next/headers";
 import prisma from "@/prisma";
@@ -6,7 +8,10 @@ import SignInForm from "@/app/sign-in/SignInForm.tsx";
 import Image from "next/image";
 import React from "react";
 import SubmitLoginToServiceForm from "@/app/sign-in/SubmitLoginToServiceForm.tsx";
+import {redirect} from "next/navigation";
 
+
+// @ts-ignore
 const Page = async () => {
 
 
@@ -27,7 +32,6 @@ const Page = async () => {
 };
 
 async function Form() {
-
     const header = headers();
     const cookie = cookies();
     const referer = header.get('Referer');
@@ -62,6 +66,7 @@ async function Form() {
             return <SubmitLoginToServiceForm user={user!} service={service}/>
         }
     }
+    redirect("/")
 }
 
 export default Page;

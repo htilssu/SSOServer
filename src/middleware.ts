@@ -14,10 +14,9 @@
 
 import type {NextRequest} from 'next/server'
 import {NextResponse} from 'next/server'
-import {jwk, jwtVerify} from "@/services/jwt.service.ts";
+import {jwtVerify} from "@/services/jwt.service.ts";
 import {SsoRequest} from "@/SsoRequest.ts";
 
-console.log(jwk)
 
 const corsOptions = {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -46,6 +45,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
     matcher: [
-        '/((?!.*sso.*|.*password|.*sign-in.*|.*sign-up.*|_next|_next/image|favicon.ico|sitemap.xml|robots.txt|public).*)',
+        '/((?!.*test.*|404|.*sso.*|.*password|.*sign-in.*|.*sign-up.*|_next|_next/image|favicon.ico|sitemap.xml|robots.txt|public).*)',
     ]
 }

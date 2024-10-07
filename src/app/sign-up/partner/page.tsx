@@ -7,7 +7,7 @@ import Image from "next/image";
 import Field from "../../../../public/backgrounds/field.png";
 
 const Page = async () => {
-    let services: Service[] = await prisma.service.findMany();
+    const services: Service[] = await prisma.service.findMany();
 
     return (
         <div className={"relative flex justify-center items-center h-full min-h-screen p-4"}>

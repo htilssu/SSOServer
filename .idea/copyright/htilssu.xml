@@ -1,6 +1,6 @@
 <component name="CopyrightManager">
   <copyright>
-    <option name="notice" value="/*******************************************************&#10; * Copyright (c) &amp;#36;today.year htilssu&#10; *&#10; * This code is the property of &amp;#36;author. All rights reserved.&#10; * Redistribution or reproduction of any part of this code&#10; * in any form, with or without modification, is strictly&#10; * prohibited without prior written permission from the author.&#10; *&#10; * Author: htilssu&#10; * Created: &amp;#36;today.day-&amp;#36;today.month-&amp;#36;today.year&#10; *******************************************************/" />
+    <option name="notice" value="/*******************************************************&#10; * Copyright (c) &amp;#36;today.year htilssu&#10; *&#10; * This code is the property of htilssu. All rights reserved.&#10; * Redistribution or reproduction of any part of this code&#10; * in any form, with or without modification, is strictly&#10; * prohibited without prior written permission from the author.&#10; *&#10; * Author: htilssu&#10; * Created: &amp;#36;today.day-&amp;#36;today.month-&amp;#36;today.year&#10; *******************************************************/" />
     <option name="myName" value="htilssu" />
   </copyright>
 </component>

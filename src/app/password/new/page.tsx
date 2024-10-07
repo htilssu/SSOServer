@@ -30,7 +30,6 @@ const Page = ({searchParams}) => {
                 session: searchParams.t
             }
         })
-
     }
 
     return (

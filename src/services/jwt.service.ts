@@ -1,15 +1,23 @@
 import * as jose from 'jose';
 import {SignJWT} from 'jose';
-import humanInterval from "human-interval";
 
 const privateKey = process.env.RSA_PRIVATE_KEY!;
 const publicKey = process.env.RSA_PUBLIC_KEY!;
-const encodedPrivateKey = await jose.importPKCS8(privateKey, 'RS256')
-const encodedPublicKey = await jose.importSPKI(publicKey, 'RS256')
-console.log(encodedPublicKey)
-export const jwk = await jose.exportJWK(encodedPublicKey)
+let encodedPrivateKey: jose.KeyLike;
+let encodedPublicKey: jose.KeyLike;
+let jwk: jose.JWK;
 
-export const tokenLifetime = humanInterval(process.env.TOKEN_LIFETIME!);
+async function load() {
+    encodedPrivateKey = await jose.importPKCS8(privateKey, 'RS256', {
+        extractable: true,
+    });
+    encodedPublicKey = await jose.importSPKI(publicKey, 'RS256', {
+        extractable: true,
+    })
+    jwk = await jose.exportJWK(encodedPublicKey)
+}
+
+load().then();
 
 export type TokenPayload = {
     [key: string]: string;
@@ -39,3 +47,6 @@ export const jwtVerify = async (token: string) => {
         return null;
     }
 }
+
+export {encodedPublicKey, jwk, encodedPrivateKey}
+

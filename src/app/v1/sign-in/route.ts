@@ -3,7 +3,7 @@ import {jwtSign} from "@/services/jwt.service.ts";
 import {verifyPassword} from "@/services/password.service.ts";
 import prisma from "@/prisma";
 import {ErrorModel} from "@/dtos/error.model";
-import {removeNullProperties} from "@/utils/object.util.tsx";
+import {removeNullProperties} from "@/utils/object.util.ts";
 
 export type SignInBody = {
     email: string

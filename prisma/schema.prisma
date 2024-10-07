@@ -79,6 +79,7 @@ model TempSession {
   id        String   @id @default(cuid()) @map("_id")
   session   String
   returnUrl String?
+  s         String?
   expiredAt DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

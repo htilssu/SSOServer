@@ -12,7 +12,7 @@ import {IconAt, IconCalendar, IconKey} from "@tabler/icons-react";
 import Link from "next/link";
 import {ErrorModel} from "@/dtos/error.model.ts";
 import {signUpUser} from "@/services/sign-up.service.ts";
-import {removeNullProperties} from "@/utils/object.util.tsx";
+import {removeNullProperties} from "@/utils/object.util.ts";
 
 const now = new Date();
 const maxDate = new Date(now.getFullYear() - minAge, now.getMonth(), now.getDate());

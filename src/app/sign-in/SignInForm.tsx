@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import EmailInput from "@/components/EmailInput";
 import {Button, Checkbox, PasswordInput} from "@mantine/core";
 import Link from "next/link";
@@ -11,6 +11,8 @@ import {Service} from '@prisma/client';
 import {passwordValidator} from "@/validators/password.validator";
 import {IconKey, IconMail} from "@tabler/icons-react";
 import {signIn, SignInData} from "@/services/sign-in.service.ts";
+import {useSearchParams} from "next/navigation";
+import {setTempSession} from "@/services/temp-session.service.ts";
 
 
 interface SignInFormProps {
@@ -18,6 +20,14 @@ interface SignInFormProps {
 }
 
 const SignInForm = ({service}: SignInFormProps) => {
+    const searchParams = useSearchParams();
+    useEffect(() => {
+        if (searchParams.has('s')) {
+            setTempSession(searchParams.get('s')!).then()
+        }
+    }, []);
+
+
     const [loading, {open, close}] = useDisclosure(false);
     const [loginStatus, setLoginStatus] = useState<ErrorModel | null>(null)
     const form = useForm({

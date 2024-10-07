@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import {createUser} from "@/services/user.service.ts";
 import {jwtSign} from "@/services/jwt.service.ts";
-import {removeNullProperties} from "@/utils/object.util.tsx";
+import {removeNullProperties} from "@/utils/object.util.ts";
 import {ErrorModel} from "@/dtos/error.model.ts";
 
 export interface SignUpDto {

@@ -8,19 +8,18 @@
  *  * prohibited without prior written permission from the author.
  *  *
  *  * Author: htilssu
- *  * Created: 5-10-2024
+ *  * Created: 6-10-2024
  *  ******************************************************
  */
 
-import {NextResponse} from "next/server";
-import {jwk} from "@/services/jwt.service.ts";
+import prisma from "@/prisma.ts";
 
-export async function GET(request: Request) {
-    const {searchParams} = new URL(request.url);
-    const type = searchParams.get('type');
-    if (type === 'pem') {
-        return NextResponse.json(process.env.RSA_PUBLIC_KEY);
-    }
+export async function isServiceExist(id: string) {
+    const service = await prisma.service.findFirst({
+        where: {
+            id: id
+        }
+    });
 
-    return NextResponse.json({keys: [jwk]});
+    return service !== null;
 }
