@@ -18,10 +18,10 @@ import {jwtVerify} from "@/services/jwt.service.ts";
 import {SsoRequest} from "@/SsoRequest.ts";
 
 
-const corsOptions = {
+/*const corsOptions = {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-}
+}*/
 
 declare global {
 
@@ -45,6 +45,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
     matcher: [
-        '/((?!.*test.*|404|.*sso.*|.*password|.*sign-in.*|.*sign-up.*|_next|_next/image|favicon.ico|sitemap.xml|robots.txt|public).*)',
+        '/((?!.*cron|.*test.*|404|.*sso.*|.*password|.*sign-in.*|.*sign-up.*|_next|_next/image|favicon.ico|sitemap.xml|robots.txt|public).*)',
     ]
 }
