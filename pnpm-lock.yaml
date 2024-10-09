@@ -38,6 +38,9 @@ importers:
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
+      gen-totp:
+        specifier: ^2.0.6
+        version: 2.0.6
       human-interval:
         specifier: ^2.0.1
         version: 2.0.1
@@ -1623,6 +1626,9 @@ packages:
     engines: {node: '>=10'}
     deprecated: This package is no longer supported.
 
+  gen-totp@2.0.6:
+    resolution: {integrity: sha512-JgQZM5XEYnvzUt/5sQIphS1FvObbBFsR0A5r+OTQbbABTZmsGHGbQaeh3s+ZWzcCqJYUwW2LKI9iDqLGkVUzAQ==}
+
   gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
@@ -2124,6 +2130,9 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
+
+  jssha@3.3.1:
+    resolution: {integrity: sha512-VCMZj12FCFMQYcFLPRm/0lOBbLi8uM2BhXPTqw3U4YAfs4AZfiApOoBLoN8cQE60Z50m1MYMTQVCfgF/KaCVhQ==}
 
   jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
@@ -5011,6 +5020,10 @@ snapshots:
       strip-ansi: 6.0.1
       wide-align: 1.1.5
 
+  gen-totp@2.0.6:
+    dependencies:
+      jssha: 3.3.1
+
   gensync@1.0.0-beta.2: {}
 
   get-caller-file@2.0.5: {}
@@ -5694,6 +5707,8 @@ snapshots:
       minimist: 1.2.8
 
   json5@2.2.3: {}
+
+  jssha@3.3.1: {}
 
   jsx-ast-utils@3.3.5:
     dependencies:
