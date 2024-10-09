@@ -1,7 +1,7 @@
 'use server'
 
 import Field from '../../../public/backgrounds/field.png'
-import {cookies} from "next/headers";
+import {cookies, headers} from "next/headers";
 import prisma from "@/prisma";
 import {jwtVerify} from "@/services/jwt.service.ts";
 import SignInForm from "@/app/sign-in/SignInForm.tsx";
@@ -35,9 +35,11 @@ const Page = async ({searchParams}) => {
 
 async function Form() {
     const cookie = cookies();
+    const header = headers();
 
     const returnUrl = searchParamsGlobal.returnUrl;
     const serviceId = searchParamsGlobal.serviceId;
+    const referer = header.get('Referer');
     let tokenClaim;
 
     if (!cookie.has('Token')) {
@@ -57,7 +59,7 @@ async function Form() {
     });
     let service;
 
-    if (returnUrl && serviceId) {
+    if (returnUrl && serviceId && referer) {
         service = await prisma.service.findFirst({
             where: {
                 id: serviceId
@@ -65,7 +67,7 @@ async function Form() {
         });
 
         if (service && user) {
-            return <SubmitLoginToServiceForm user={user} service={service}/>
+            return <SubmitLoginToServiceForm user={user} service={service} referer={referer}/>
         }
     }
     return <SignInForm/>;

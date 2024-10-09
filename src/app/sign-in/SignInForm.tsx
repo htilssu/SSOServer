@@ -12,7 +12,7 @@ import {passwordValidator} from "@/validators/password.validator";
 import {IconKey, IconMail} from "@tabler/icons-react";
 import {signIn, SignInData} from "@/services/sign-in.service.ts";
 import {useSearchParams} from "next/navigation";
-import cookie from "cookie";
+import {parse} from "cookie";
 
 
 interface SignInFormProps {
@@ -47,7 +47,7 @@ const SignInForm = ({service}: SignInFormProps) => {
         if (!res.ok) {
             setLoginStatus(await res.json())
         } else {
-            const cookies = cookie.parse(document.cookie);
+            const cookies = parse(document.cookie);
             location.href = returnUrl + `?Token=${cookies.Token}`
         }
     }
