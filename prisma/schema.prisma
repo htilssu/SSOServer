@@ -28,18 +28,39 @@ model Account {
   @@unique([email, accountType])
 }
 
+model Role {
+  id          String     @id @default(cuid()) @map("_id")
+  name        String     @unique
+  description String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  UserRole    UserRole[]
+}
+
+model UserRole {
+  id        String   @id @default(cuid()) @map("_id")
+  User      User     @relation(fields: [userId], references: [id])
+  Role      Role     @relation(fields: [roleId], references: [id])
+  userId    String
+  roleId    String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, roleId])
+}
+
 model User {
-  id          String    @id @default(cuid()) @map("_id")
+  id          String     @id @default(cuid()) @map("_id")
   firstName   String
   lastName    String
   avatar      String?
   dob         DateTime
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  username    String?   @unique
-  phoneNumber String?   @unique
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  username    String?    @unique
+  phoneNumber String?    @unique
   metadata    Json?
   Account     Account[]
+  UserRole    UserRole[]
 }
 
 model Partner {
