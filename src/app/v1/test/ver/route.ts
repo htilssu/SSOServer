@@ -11,5 +11,4 @@ export async function GET(request: NextRequest) {
     } catch (e) {
         return NextResponse.json({error: (e as Error).message}, {status: 400});
     }
-
 }
