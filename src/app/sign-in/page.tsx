@@ -8,7 +8,6 @@ import SignInForm from "@/app/sign-in/SignInForm.tsx";
 import Image from "next/image";
 import React from "react";
 import SubmitLoginToServiceForm from "@/app/sign-in/SubmitLoginToServiceForm.tsx";
-import {redirect} from "next/navigation";
 
 
 let searchParamsGlobal: { returnUrl: any; serviceId: any; };
@@ -65,11 +64,11 @@ async function Form() {
             }
         });
 
-        if (service) {
-            return <SubmitLoginToServiceForm user={user!} service={service}/>
+        if (service && user) {
+            return <SubmitLoginToServiceForm user={user} service={service}/>
         }
     }
-    redirect("/")
+    return <SignInForm/>;
 }
 
 export default Page;

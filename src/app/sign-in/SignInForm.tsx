@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import EmailInput from "@/components/EmailInput";
 import {Button, Checkbox, PasswordInput} from "@mantine/core";
 import Link from "next/link";
@@ -12,7 +12,7 @@ import {passwordValidator} from "@/validators/password.validator";
 import {IconKey, IconMail} from "@tabler/icons-react";
 import {signIn, SignInData} from "@/services/sign-in.service.ts";
 import {useSearchParams} from "next/navigation";
-import {setTempSession} from "@/services/temp-session.service.ts";
+import cookie from "cookie";
 
 
 interface SignInFormProps {
@@ -21,11 +21,7 @@ interface SignInFormProps {
 
 const SignInForm = ({service}: SignInFormProps) => {
     const searchParams = useSearchParams();
-    useEffect(() => {
-        if (searchParams.has('s')) {
-            setTempSession(searchParams.get('s')!).then()
-        }
-    }, []);
+    const returnUrl = searchParams.get('returnUrl');
 
 
     const [loading, {open, close}] = useDisclosure(false);
@@ -50,6 +46,9 @@ const SignInForm = ({service}: SignInFormProps) => {
         close();
         if (!res.ok) {
             setLoginStatus(await res.json())
+        } else {
+            const cookies = cookie.parse(document.cookie);
+            location.href = returnUrl + `?Token=${cookies.Token}`
         }
     }
 
