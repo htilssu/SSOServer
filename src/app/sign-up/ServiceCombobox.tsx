@@ -43,7 +43,8 @@ const PartnerCombobox = ({services, setService, currentService, ...props}: Servi
 
 
     return (
-        <Combobox {...props} store={comboboxStore} onOptionSubmit={onComboboxSubmit}>
+        // @ts-ignore
+        <Combobox {...props} value={serviceName} store={comboboxStore} onOptionSubmit={onComboboxSubmit}>
             <Combobox.Target>
                 <InputBase value={serviceName} type={"button"}
                            pointer

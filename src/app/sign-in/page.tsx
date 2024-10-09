@@ -13,6 +13,22 @@ import SubmitLoginToServiceForm from "@/app/sign-in/SubmitLoginToServiceForm.tsx
 let searchParamsGlobal: { returnUrl: any; serviceId: any; };
 
 // @ts-ignore
+export async function generateMetadata({searchParams}) {
+    const serviceId = searchParams.serviceId;
+    const service = await prisma.service.findFirst({
+        where: {
+            id: serviceId
+        }
+    });
+
+    const title = service ? `Trang đăng nhập vào ${service.name}` : "Trang đăng nhập";
+
+    return {
+        title: title,
+    }
+}
+
+// @ts-ignore
 const Page = async ({searchParams}) => {
 
     searchParamsGlobal = searchParams;
@@ -51,11 +67,15 @@ async function Form() {
         return <SignInForm/>
     }
 
-    const userId = tokenClaim.sub;
-    const user = await prisma.user.findFirst({
+    const accountId = tokenClaim.sub;
+    const account = await prisma.account.findFirst({
         where: {
-            id: userId
+            id: accountId
         },
+        include: {
+            User: true,
+            Partner: true
+        }
     });
     let service;
 
@@ -66,8 +86,9 @@ async function Form() {
             }
         });
 
-        if (service && user) {
-            return <SubmitLoginToServiceForm user={user} service={service} referer={referer}/>
+        if (service && account) {
+            // @ts-ignore
+            return <SubmitLoginToServiceForm account={account} service={service} referer={referer}/>
         }
     }
     return <SignInForm/>;

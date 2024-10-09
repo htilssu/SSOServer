@@ -21,6 +21,7 @@ interface SignInFormProps {
 
 const SignInForm = ({service}: SignInFormProps) => {
     const searchParams = useSearchParams();
+    const searchParamString = searchParams.toString();
     const returnUrl = searchParams.get('returnUrl');
 
 
@@ -98,7 +99,7 @@ const SignInForm = ({service}: SignInFormProps) => {
                     Đăng nhập
                 </Button>
                 <p className="text-gray-800 text-sm text-center mt-6">Không có tài khoản? <Link
-                    href="/sign-up"
+                    href={`/sign-up?${searchParamString}`}
                     className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Đăng ký</Link></p>
             </div>
 

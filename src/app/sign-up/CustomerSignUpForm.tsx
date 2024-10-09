@@ -129,10 +129,16 @@ const CustomerSignUpForm = () => {
                     <Button fullWidth size={'md'} type={"submit"}>
                         Đăng ký
                     </Button>
+                    <div className={'mt-2 flex justify-center'}>
+                        <Link href={'/sign-up/partner'} className={'text-sm hover:text-blue-600 font-bold'}>
+                            Đăng ký Partner
+                        </Link>
+                    </div>
                 </div>
             </form>
             <div className={'flex mt-3 justify-center'}>
-                <p className={'text-sm text-gray-700'}>Đã có tài khoản <Link
+                <p className={'text-sm text-gray-700'}>Đã có tài khoản
+                    <Link
                     className={'font-bold hover:underline text-blue-600 ml-1'} href={"/sign-in"}>Đăng nhập</Link>
                 </p>
             </div>
