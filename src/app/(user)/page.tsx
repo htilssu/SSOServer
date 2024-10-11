@@ -2,17 +2,17 @@
  * ******************************************************
  *  * Copyright (c) 2024 htilssu
  *  *
- *  * This code is the property of $author. All rights reserved.
+ *  * This code is the property of htilssu. All rights reserved.
  *  * Redistribution or reproduction of any part of this code
  *  * in any form, with or without modification, is strictly
  *  * prohibited without prior written permission from the author.
  *  *
  *  * Author: htilssu
- *  * Created: 5-10-2024
+ *  * Created: 11-10-2024
  *  ******************************************************
  */
 import React from 'react';
-import Shield from '../../public/shield.svg'
+import Shield from '../../../public/shield.svg'
 import Image from "next/image";
 import Link from "next/link";
 

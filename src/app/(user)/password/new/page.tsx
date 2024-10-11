@@ -15,9 +15,9 @@
 import React from 'react';
 import prisma from "@/prisma.ts";
 import {redirect} from "next/navigation";
-import NewPasswordForm from "@/app/password/new/NewPasswordForm.tsx";
+import NewPasswordForm from "@/app/(user)/password/new/NewPasswordForm.tsx";
 import Image from "next/image";
-import Lonely from "../../../../public/backgrounds/lonely.jpg"
+import Lonely from "../../../../../public/backgrounds/lonely.jpg"
 
 // @ts-ignore
 const Page = ({searchParams}) => {

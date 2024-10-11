@@ -22,9 +22,6 @@ import {jwtVerify} from "@/services/jwt.service.ts";
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 }*/
 
-declare global {
-
-}
 
 export async function middleware(request: NextRequest) {
     const token = request.headers.get('Authorization') ?? request.cookies.get('Token')?.value;

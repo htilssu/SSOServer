@@ -1,13 +1,12 @@
 'use server'
 
-import Field from '../../../public/backgrounds/field.png'
-import {cookies} from "next/headers";
+import Field from '@@/backgrounds/field.png';
+import {cookies, headers} from "next/headers";
 import prisma from "@/prisma";
 import {jwtVerify} from "@/services/jwt.service.ts";
-import SignInForm from "@/app/sign-in/SignInForm.tsx";
 import Image from "next/image";
 import React from "react";
-import SubmitLoginToServiceForm from "@/app/sign-in/SubmitLoginToServiceForm.tsx";
+import SignInForm from "@/app/(user)/sign-in/SignInForm.tsx";
 
 
 let searchParamsGlobal: { returnUrl: any; serviceId: any; };

@@ -1,10 +1,10 @@
 import React from 'react';
 import '@mantine/dates/styles.css';
-import prisma from "@/prisma";
+import prisma from "@/prisma.ts";
 import {Service} from "@prisma/client";
-import PartnerSignUpForm from "@/app/sign-up/PartnerSignUpForm.tsx";
+import PartnerSignUpForm from "@/app/(user)/sign-up/PartnerSignUpForm.tsx";
 import Image from "next/image";
-import Field from "../../../../public/backgrounds/field.png";
+import Field from "@@/backgrounds/field.png";
 
 const Page = async () => {
     const services: Service[] = await prisma.service.findMany();

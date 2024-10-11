@@ -1,8 +1,8 @@
 import React from 'react';
 import '@mantine/dates/styles.css';
-import CustomerSignUpForm from "@/app/sign-up/CustomerSignUpForm.tsx";
+import CustomerSignUpForm from "@/app/(user)/sign-up/CustomerSignUpForm.tsx";
 import Image from "next/image";
-import Field from "../../../public/backgrounds/field.png";
+import Field from "../../../../public/backgrounds/field.png";
 
 const Page = async () => {
 

@@ -2,11 +2,11 @@
 
 import React, {useState} from 'react';
 import {isEmail, isNotEmpty, useForm} from "@mantine/form";
-import {confirmPasswordValidator, passwordValidator} from "@/validators/password.validator";
-import EmailInput from "@/components/EmailInput";
+import {confirmPasswordValidator, passwordValidator} from "@/validators/password.validator.ts";
+import EmailInput from "@/components/EmailInput.tsx";
 import {Box, Button, Checkbox, InputWrapper, LoadingOverlay, PasswordInput, TextInput} from "@mantine/core";
 import {DateInput} from '@mantine/dates';
-import {dobValidator, maxAge, minAge} from "@/validators/dob.validator";
+import {dobValidator, maxAge, minAge} from "@/validators/dob.validator.ts";
 import {useDisclosure} from "@mantine/hooks";
 import {IconAt, IconCalendar, IconKey} from "@tabler/icons-react";
 import Link from "next/link";

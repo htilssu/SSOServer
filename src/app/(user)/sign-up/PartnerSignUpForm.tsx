@@ -2,14 +2,14 @@
 
 import React from "react";
 import {isEmail, useForm} from "@mantine/form";
-import {confirmPasswordValidator, passwordValidator,} from "@/validators/password.validator";
-import EmailInput from "@/components/EmailInput";
+import {confirmPasswordValidator, passwordValidator,} from "@/validators/password.validator.ts";
+import EmailInput from "@/components/EmailInput.tsx";
 import {Box, Button, Checkbox, InputWrapper, LoadingOverlay, PasswordInput,} from "@mantine/core";
 import {DateInput} from "@mantine/dates";
 import {useDisclosure} from "@mantine/hooks";
 import {IconAt, IconCalendar, IconKey} from "@tabler/icons-react";
 import {Service} from "@prisma/client";
-import PartnerCombobox from "@/app/sign-up/ServiceCombobox";
+import PartnerCombobox from "@/app/(user)/sign-up/ServiceCombobox.tsx";
 import {maxAge, minAge} from "@/validators/dob.validator.ts";
 
 const now = new Date();

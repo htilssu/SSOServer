@@ -12,19 +12,32 @@
  *  ******************************************************
  */
 
-import prisma from "@/prisma";
 import {NextRequest, NextResponse} from "next/server";
+import {ErrorModel} from "@/dtos/error.model.ts";
+import prisma from "@/prisma.ts";
+import {USER_NOT_FOUND} from "@/exceptions/Error.ts";
 
 export async function GET(request: NextRequest, {params}: {
     params: { userId: string }
 }) {
+    try {
+        const user = await prisma.user.findFirst({
+            where: {
+                id: params.userId
+            }
+        })
 
-
-    const user = await prisma.user.findFirst({
-        where: {
-            id: params.userId
+        if (!user) {
+            return NextResponse.json(USER_NOT_FOUND, {
+                status: 404
+            })
         }
-    });
 
-    return NextResponse.json(user);
+        return NextResponse.json(user);
+    } catch (e) {
+        const ee = e as Error
+        return NextResponse.json(new ErrorModel(ee.message, ee.cause as string, -1), {
+            status: 401
+        })
+    }
 }

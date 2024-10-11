@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from "next/image";
-import Field from "../../../../public/backgrounds/field.png"
-import ForgotPasswordForm from "@/app/password/forgot/ForgotPasswordForm.tsx";
+import Field from "../../../../../public/backgrounds/field.png"
+import ForgotPasswordForm from "@/app/(user)/password/forgot/ForgotPasswordForm.tsx";
 
 const Page = () => {
     return (
