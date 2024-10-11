@@ -56,11 +56,14 @@ model User {
   dob         DateTime
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  username    String?    @unique
-  phoneNumber String?    @unique
+  username    String?
+  phoneNumber String?
   metadata    Json?
   Account     Account[]
   UserRole    UserRole[]
+
+  @@index([username])
+  @@index([phoneNumber])
 }
 
 model Partner {

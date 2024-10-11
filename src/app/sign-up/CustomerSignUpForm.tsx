@@ -61,6 +61,8 @@ const CustomerSignUpForm = () => {
         close();
         if (!res.ok) {
             setSignUpErr(await res.json())
+        } else {
+            setSignUpErr(() => null)
         }
     }
 
