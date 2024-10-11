@@ -49,7 +49,7 @@ const SignInForm = ({service}: SignInFormProps) => {
             setLoginStatus(await res.json())
         } else {
             const cookies = parse(document.cookie);
-            location.href = returnUrl + `?Token=${cookies.Token}`
+            if (returnUrl) location.href = returnUrl + `?Token=${cookies.Token}`
         }
     }
 
