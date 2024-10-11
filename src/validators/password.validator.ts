@@ -1,6 +1,6 @@
 export function passwordValidator(password: string) {
 
-    if (password.length === 0) {
+    if (!password || password.length === 0) {
         return "Mật khẩu không được để trống";
     }
     if (password.length < 8) {
