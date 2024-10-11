@@ -25,6 +25,8 @@ export async function createUser(data: SignUpDto) {
         });
     }
 
+    const isUserExisted = await isUserExist(data);
+
     try {
         // @ts-ignore
         const newUser: User = {
@@ -58,17 +60,16 @@ export async function createUser(data: SignUpDto) {
 }
 
 
-async function isUserExist(unique: string) {
+async function isUserExist(unique: SignUpDto) {
     const user = await prisma.user.findFirst({
         where: {
             OR: [
-                {id: unique},
-                {phoneNumber: unique},
-                {username: unique},
+                {phoneNumber: unique.phoneNumber},
+                {username: unique.username},
                 {
                     Account: {
                         some: {
-                            email: unique
+                            email: unique.email
                         }
                     }
                 }

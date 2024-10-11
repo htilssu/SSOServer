@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.668.0",
     "@mantine/core": "^7.13.2",
     "@mantine/dates": "^7.13.2",
     "@mantine/form": "^7.13.2",
@@ -21,6 +22,7 @@
     "bcrypt": "^5.1.1",
     "cookie": "^1.0.0",
     "dayjs": "^1.11.13",
+    "gen-totp": "^2.0.6",
     "human-interval": "^2.0.1",
     "jose": "^5.9.3",
     "next": "14.2.14",
