@@ -38,11 +38,13 @@ export async function POST(request: NextRequest) {
         });
     }
 
+    const {password, User, Partner, ...claim} = account;
+
 
     const token = await jwtSign(removeNullProperties({
         ...account.User,
         ...account.Partner,
-        ...account,
+        ...claim,
         userId: account.User?.id,
         partnerId: account.Partner?.id,
         role: account.userId ? "user" : "partner"

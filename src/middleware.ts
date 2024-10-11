@@ -15,7 +15,6 @@
 import type {NextRequest} from 'next/server'
 import {NextResponse} from 'next/server'
 import {jwtVerify} from "@/services/jwt.service.ts";
-import {SsoRequest} from "@/SsoRequest.ts";
 
 
 /*const corsOptions = {
@@ -35,10 +34,12 @@ export async function middleware(request: NextRequest) {
 
     const claim = await jwtVerify(token);
     if (!claim) {
-        return NextResponse.redirect(new URL('/sign-in', request.url))
+        return NextResponse.redirect(new URL('/sign-in', request.url), {
+            headers: {
+                'Set-Cookie': `Token=; Path=/; HttpOnly; Max-Age=0; SameSite=Strict; Secure`
+            }
+        })
     }
-
-    (request as SsoRequest).claim = claim;
 
     return NextResponse.next()
 }
