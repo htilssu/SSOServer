@@ -11,22 +11,20 @@ import {parse} from "cookie";
 interface SubmitLoginFormProps {
     account: Account & { User?: User, Partner?: Partner },
     service: Service,
-    referer: string
 }
 
-const SubmitLoginToServiceForm = ({account, service, referer}: SubmitLoginFormProps) => {
+const SubmitLoginToServiceForm = ({account, service}: SubmitLoginFormProps) => {
     const searchParams = useSearchParams();
     const returnUrl = searchParams.get('returnUrl')!;
 
 
     function acceptLoginHandler() {
         const cookies = parse(document.cookie);
-        console.log(cookies)
         location.href = returnUrl + `?Token=${cookies.Token!}`
     }
 
     function cancelLoginHandler() {
-        location.href = referer!;
+        location.href = returnUrl;
     }
 
     return (
