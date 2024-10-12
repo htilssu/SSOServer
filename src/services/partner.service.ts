@@ -44,15 +44,21 @@ export async function createPartner(data: SignUpDto) {
                 }
             }
         });
-        return await prisma.partner.findFirst({
-            where: {
-                Account: {
-                    some: {
-                        id: account.id
+        return {
+            ...await prisma.partner.findFirst({
+                where: {
+                    Account: {
+                        some: {
+                            id: account.id
+                        }
                     }
+                },
+                include: {
+                    PartnerService: true
                 }
-            }
-        })
+            }),
+            email: account.email
+        }
 
     } catch (e) {
         throw new Error("Có lỗi khi tạo tài khoản partner", {
