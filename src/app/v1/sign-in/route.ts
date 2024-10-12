@@ -20,7 +20,11 @@ export async function POST(request: NextRequest) {
             email: body.email
         },
         include: {
-            Partner: true,
+            Partner: {
+                include: {
+                    PartnerService: true
+                }
+            },
             User: true
         }
     })
