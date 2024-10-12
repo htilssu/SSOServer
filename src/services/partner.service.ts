@@ -78,3 +78,32 @@ async function isPartnerAccountExist(email: string) {
 
     return partner === null;
 }
+
+export async function getPartnerDto(partnerId: string) {
+    const partner = await prisma.partner.findFirst({
+        where: {
+            id: partnerId
+        },
+        include: {
+            PartnerService: {
+                include: {
+                    Service: true
+                }
+            },
+            Account: true
+        }
+    });
+
+    if (!partner) throw new Error("Không tìm thấy partner", {
+        cause: "PARTNER_NOT_FOUND"
+    })
+
+    return {
+        ...partner,
+        Account: partner.Account
+                        .map(account => ({
+                            ...account,
+                            password: undefined
+                        }))
+    };
+}

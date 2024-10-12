@@ -91,3 +91,11 @@ async function isAccountExist(email: string) {
     return account != null
 }
 
+export async function getUser(id: string) {
+    return prisma.user.findFirst({
+        where: {
+            id: id
+        }
+    })
+}
+
