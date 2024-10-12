@@ -2,10 +2,10 @@
 
 import React from 'react';
 import SubmitOption from './SubmitOption';
-import UserInfoCard from "@/app/sign-in/UserInfoCard";
 import {Account, Partner, Service, User} from "@prisma/client";
 import {useSearchParams} from "next/navigation";
 import {parse} from "cookie";
+import UserInfoCard from './UserInfoCard';
 
 
 interface SubmitLoginFormProps {
