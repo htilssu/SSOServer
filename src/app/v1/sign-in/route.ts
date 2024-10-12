@@ -1,9 +1,9 @@
 import {NextRequest, NextResponse} from "next/server";
-import {jwtSign} from "@/services/jwt.service.ts";
+import {expiredTimeInSecs, jwtSign} from "@/services/jwt.service.ts";
 import {verifyPassword} from "@/services/password.service.ts";
 import prisma from "@/prisma";
-import {ErrorModel} from "@/dtos/error.model";
 import {removeNullProperties} from "@/utils/object.util.ts";
+import {USER_NOT_FOUND, WRONG_PASSWORD} from "@/exceptions/Error.ts";
 
 export type SignInBody = {
     email: string
@@ -26,14 +26,14 @@ export async function POST(request: NextRequest) {
     })
 
     if (!account) {
-        return NextResponse.json(new ErrorModel("NOT_FOUND", "Người dùng không tồn tại", -1), {
+        return NextResponse.json(USER_NOT_FOUND, {
             status: 401
         });
     }
 
     const isLogged = verifyPassword(body.password, account.password);
     if (!isLogged) {
-        return NextResponse.json(new ErrorModel("WRONG_PASSWORD", "Mật khẩu không đúng!", -1), {
+        return NextResponse.json(WRONG_PASSWORD, {
             status: 401
         });
     }
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({}, {
         status: 200,
         headers: {
-            'Set-Cookie': `Token=${token};Max-Age=${7 * 24 * 60 * 60} ; Path=/; SameSite=Strict; Secure`
+            'Set-Cookie': `Token=${token};Max-Age=${expiredTimeInSecs} ; Path=/; SameSite=Strict; Secure`
         }
     });
 }

@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import {createUser} from "@/services/user.service.ts";
-import {jwtSign} from "@/services/jwt.service.ts";
+import {expiredTimeInSecs, jwtSign} from "@/services/jwt.service.ts";
 import {removeNullProperties} from "@/utils/object.util.ts";
 import {ErrorModel} from "@/dtos/error.model.ts";
 
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
                     'Set-Cookie': `Token=${await jwtSign(removeNullProperties({
                         ...user,
                         role: "user"
-                    }))}; HttpOnly; Path=/; SameSite=Strict; Max-Age=31536000;`
+                    }))}; HttpOnly; Path=/; SameSite=Strict; Max-Age=${expiredTimeInSecs};`
                 }
             });
         } catch (e) {

@@ -1,5 +1,10 @@
 import * as jose from 'jose';
 import {SignJWT} from 'jose';
+import ms from 'ms';
+
+export const expiredTimeInMill = ms(process.env.TOKEN_LIFETIME ?? "7d")
+export const expiredTimeInSecs = expiredTimeInMill / 1000;
+
 
 const privateKey = process.env.RSA_PRIVATE_KEY!;
 const publicKey = process.env.RSA_PUBLIC_KEY!;
@@ -32,7 +37,7 @@ export const jwtSign = async (payload: TokenPayload) => {
     ).setExpirationTime(process.env.TOKEN_LIFETIME!)
      .setProtectedHeader({
          alg: 'RS256',
-         typ: 'JWT'
+         typ: 'JWT',
      }).sign(encodedPrivateKey);
 }
 
@@ -49,4 +54,3 @@ export const jwtVerify = async (token: string) => {
 }
 
 export {encodedPublicKey, jwk, encodedPrivateKey}
-
