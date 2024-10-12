@@ -3,18 +3,9 @@ import {createUser} from "@/services/user.service.ts";
 import {expiredTimeInSecs, jwtSign} from "@/services/jwt.service.ts";
 import {removeNullProperties} from "@/utils/object.util.ts";
 import {ErrorModel} from "@/dtos/error.model.ts";
+import {SignUpDto} from "@/services/sign-up.service.ts";
 
-export interface SignUpDto {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    dob: string
-    username: string;
-    phoneNumber: string;
-    term: boolean;
-    service: string;
-}
+
 
 export async function POST(request: NextRequest) {
     const body: SignUpDto = await request.json();

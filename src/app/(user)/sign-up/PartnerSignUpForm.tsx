@@ -1,20 +1,17 @@
 "use client";
 
-import React from "react";
+import React, {useState} from "react";
 import {isEmail, useForm} from "@mantine/form";
 import {confirmPasswordValidator, passwordValidator,} from "@/validators/password.validator.ts";
 import EmailInput from "@/components/EmailInput.tsx";
 import {Box, Button, Checkbox, InputWrapper, LoadingOverlay, PasswordInput,} from "@mantine/core";
-import {DateInput} from "@mantine/dates";
 import {useDisclosure} from "@mantine/hooks";
-import {IconAt, IconCalendar, IconKey} from "@tabler/icons-react";
+import {IconAt, IconKey} from "@tabler/icons-react";
 import {Service} from "@prisma/client";
 import PartnerCombobox from "@/app/(user)/sign-up/ServiceCombobox.tsx";
-import {maxAge, minAge} from "@/validators/dob.validator.ts";
-
-const now = new Date();
-const minDate = new Date(now.getFullYear() - maxAge, now.getMonth(), now.getDate());
-const maxDate = new Date(now.getFullYear() - minAge, now.getMonth(), now.getDate());
+import {SignUpDto, signUpPartner} from "@/services/sign-up.service.ts";
+import {removeNullProperties} from "@/utils/object.util.ts";
+import {ErrorModel} from "@/dtos/error.model.ts";
 
 interface SignUpFormProps {
     services: Service[];
@@ -47,21 +44,24 @@ const PartnerSignUpForm = ({services}: SignUpFormProps) => {
         },
     });
 
+    const [error, setError] = useState<ErrorModel>();
+
     const [visible, {open, close}] = useDisclosure(false);
 
-    function handleSignUp(values: typeof form.values) {
+    async function handleSignUp(values: typeof form.values) {
         open();
-
-        // TODO: Implement sign-up logic here
-        setTimeout(() => {
-            close();
-        }, 2000);
+        setError(undefined)
+        const res = await signUpPartner(removeNullProperties({
+            ...values
+        }) as SignUpDto);
+        close();
+        if (!res.ok) {
+            setError(await res.json());
+        }
     }
 
     function setService(partnerId: string) {
-        console.log(partnerId);
         form.setFieldValue("service", partnerId);
-        console.log(form.values);
     }
 
     return (
@@ -128,6 +128,9 @@ const PartnerSignUpForm = ({services}: SignUpFormProps) => {
                         />
                     </div>
                 </Box>
+                <div className={'text-red-600 text-sm h-4 mt-2'}>
+                    {error?.msg}
+                </div>
                 <div className="mt-5">
                     <Button fullWidth size={"md"} type={"submit"}>
                         Đăng ký

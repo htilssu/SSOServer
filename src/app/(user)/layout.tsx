@@ -18,11 +18,17 @@ import '@mantine/core/styles.css';
 import React from "react";
 import {MantineProvider} from "@mantine/core";
 import {Rubik} from "next/font/google";
+import Head from "next/head";
 
 
 export const metadata: Metadata = {
     title: "SSO Service",
     description: "Single Sign-On Service",
+    openGraph: {
+        title: "Single Sign On Service",
+        description: "Dịch vụ đăng nhập 1 lần của oggy club",
+        countryName: "VietNam",
+    }
 };
 
 const rubik = Rubik({

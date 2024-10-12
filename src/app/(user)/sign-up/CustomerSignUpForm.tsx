@@ -23,15 +23,15 @@ const CustomerSignUpForm = () => {
     const form = useForm({
         mode: "controlled",
         initialValues: {
-            email: null,
-            password: null,
-            firstName: null,
-            lastName: null,
-            confirmPassword: null,
+            email: undefined,
+            password: undefined,
+            firstName: undefined,
+            lastName: undefined,
+            confirmPassword: undefined,
             dob: maxDate,
-            username: null,
-            phoneNumber: null,
-            term: null,
+            username: undefined,
+            phoneNumber: undefined,
+            term: undefined,
         },
 
         validate: {
@@ -141,7 +141,7 @@ const CustomerSignUpForm = () => {
             <div className={'flex mt-3 justify-center'}>
                 <p className={'text-sm text-gray-700'}>Đã có tài khoản
                     <Link
-                    className={'font-bold hover:underline text-blue-600 ml-1'} href={"/sign-in"}>Đăng nhập</Link>
+                        className={'font-bold hover:underline text-blue-600 ml-1'} href={"/sign-in"}>Đăng nhập</Link>
                 </p>
             </div>
             <hr className={'border-gray-600 my-3'}></hr>

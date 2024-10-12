@@ -1,7 +1,7 @@
-import {SignUpDto} from "@/app/v1/sign-up/route.ts";
 import prisma from "@/prisma.ts";
 import {hashPassword} from "@/services/password.service.ts";
 import {passwordValidator} from "@/validators/password.validator.ts";
+import { SignUpDto } from "./sign-up.service";
 
 function userValidation(data: SignUpDto) {
 
@@ -46,7 +46,7 @@ export async function createUser(data: SignUpDto) {
         return prisma.user.findFirst({
             where: {
                 id: newAccount.userId!
-            }
+            },
         });
     } catch (e) {
         throw new Error("Đã có lỗi xảy ra");
@@ -78,9 +78,10 @@ async function isUserExist(unique: SignUpDto) {
 }
 
 async function isAccountExist(email: string) {
-    const account = await prisma.account.findUnique({
+    const account = await prisma.account.findFirst({
         where: {
-            email: email
+            email: email,
+            accountType: "user"
         }
     })
 

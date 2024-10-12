@@ -12,10 +12,29 @@
  *  ******************************************************
  */
 
-import {SignUpDto} from "@/app/v1/sign-up/route.ts";
+export interface SignUpDto {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    dob: string
+    username: string;
+    phoneNumber: string;
+    term: boolean;
+    service: string;
+}
+
+
 
 export async function signUpUser(data: SignUpDto) {
     return await fetch("/v1/sign-up", {
+        method: "POST",
+        body: JSON.stringify(data),
+    })
+}
+
+export async function signUpPartner(data: SignUpDto){
+    return await fetch("/v1/sign-up/partner", {
         method: "POST",
         body: JSON.stringify(data),
     })

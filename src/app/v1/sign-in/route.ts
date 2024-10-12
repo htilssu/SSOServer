@@ -15,7 +15,7 @@ export type SignInBody = {
 export async function POST(request: NextRequest) {
     const body = await request.json() as SignInBody;
 
-    const account = await prisma.account.findUnique({
+    const accounts = await prisma.account.findMany({
         where: {
             email: body.email
         },
@@ -25,14 +25,17 @@ export async function POST(request: NextRequest) {
         }
     })
 
-    if (!account) {
+    if (!accounts || accounts.length === 0) {
         return NextResponse.json(USER_NOT_FOUND, {
             status: 401
         });
     }
 
-    const isLogged = verifyPassword(body.password, account.password);
-    if (!isLogged) {
+    const account = accounts.filter(async account => {
+        return await verifyPassword(account.password, body.password);
+    }).at(0);
+
+    if (!account) {
         return NextResponse.json(WRONG_PASSWORD, {
             status: 401
         });
@@ -45,9 +48,7 @@ export async function POST(request: NextRequest) {
         ...account.User,
         ...account.Partner,
         ...claim,
-        userId: account.User?.id,
-        partnerId: account.Partner?.id,
-        role: account.userId ? "user" : "partner"
+        role: account.accountType
     }));
     return NextResponse.json({}, {
         status: 200,

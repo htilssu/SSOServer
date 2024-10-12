@@ -15,7 +15,7 @@ generator client {
 
 model Account {
   id          String   @id @default(cuid()) @map("_id")
-  email       String   @unique
+  email       String
   password    String
   userId      String?
   accountType String
@@ -68,10 +68,10 @@ model User {
 
 model Partner {
   id             String           @id @default(cuid()) @map("_id")
-  phoneNumber    String           @unique
-  name           String
+  phoneNumber    String?
+  name           String?
   apiKeys        String[]
-  address        String
+  address        String?
   avatar         String?
   metadata       Json?
   createdAt      DateTime         @default(now())
