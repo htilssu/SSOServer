@@ -9,6 +9,12 @@ import Field from "@@/backgrounds/field.png";
 import PartnerSignUpForm from './PartnerSignUpForm';
 import {cookies} from "next/headers";
 
+export async function generateMetadata() {
+    return {
+        title: "Đăng ký tài khoản đối tác",
+    }
+}
+
 
 const Page = async () => {
     cookies();
