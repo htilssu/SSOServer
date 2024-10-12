@@ -22,10 +22,14 @@ export async function POST(request: NextRequest) {
         include: {
             Partner: {
                 include: {
-                    PartnerService: true
+                    PartnerService: true,
                 }
             },
-            User: true
+            User: {
+                include: {
+                    UserRole: true
+                }
+            }
         }
     })
 
