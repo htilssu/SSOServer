@@ -1,14 +1,18 @@
+'use server';
+
 import React from 'react';
 import '@mantine/dates/styles.css';
 import prisma from "@/prisma.ts";
 import {Service} from "@prisma/client";
-import PartnerSignUpForm from "@/app/(user)/sign-up/PartnerSignUpForm.tsx";
 import Image from "next/image";
 import Field from "@@/backgrounds/field.png";
+import PartnerSignUpForm from './PartnerSignUpForm';
+import {cookies} from "next/headers";
+
 
 const Page = async () => {
+    cookies();
     const services: Service[] = await prisma.service.findMany();
-
     return (
         <div className={"relative flex justify-center items-center h-full min-h-screen p-4"}>
             <Image
