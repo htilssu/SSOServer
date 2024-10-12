@@ -24,18 +24,14 @@ import {jwtVerify} from "@/services/jwt.service.ts";
 
 
 export async function middleware(request: NextRequest) {
-    const token = request.headers.get('Authorization') ?? request.cookies.get('Token')?.value;
+    const token = request.cookies.get('Token')?.value;
     if (!token) {
         return NextResponse.redirect(new URL('/sign-in', request.url))
     }
 
     const claim = await jwtVerify(token);
     if (!claim) {
-        return NextResponse.redirect(new URL('/sign-in', request.url), {
-            headers: {
-                'Set-Cookie': `Token=; Path=/; HttpOnly; Max-Age=0; SameSite=Strict; Secure`
-            }
-        })
+        return NextResponse.redirect(new URL('/sign-in', request.url), )
     }
 
     return NextResponse.next()
