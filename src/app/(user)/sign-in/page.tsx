@@ -1,7 +1,7 @@
 'use server'
 
 import Field from '@@/backgrounds/field.png';
-import {cookies, headers} from "next/headers";
+import {cookies} from "next/headers";
 import prisma from "@/prisma";
 import {jwtVerify} from "@/services/jwt.service.ts";
 import Image from "next/image";
@@ -79,7 +79,13 @@ async function Form() {
     if (returnUrl && serviceId) {
         service = await prisma.service.findFirst({
             where: {
-                id: serviceId
+                OR: [
+                    {
+                        id: serviceId
+                    }, {
+                        shortId: serviceId
+                    }
+                ]
             }
         });
 
