@@ -16,10 +16,21 @@ import {NextRequest, NextResponse} from "next/server";
 import {ErrorModel} from "@/dtos/error.model.ts";
 import prisma from "@/prisma.ts";
 import {USER_NOT_FOUND} from "@/exceptions/Error.ts";
+import {decodeJwt} from "@/utils/jwt.util.ts";
 
 export async function GET(request: NextRequest, {params}: {
     params: { userId: string }
 }) {
+    const claim = decodeJwt(request);
+    const role: string = claim?.role;
+    const userId = claim?.id;
+
+    if (params.userId !== userId && role !== "admin") {
+        return NextResponse.json(new ErrorModel("PERMISSION_DENIED", "Bạn không có quyền truy cập", -1), {
+            status: 401
+        })
+    }
+
     try {
         const user = await prisma.user.findFirst({
             where: {
