@@ -1,7 +1,6 @@
 import {SignUpDto} from "@/app/v1/sign-up/route.ts";
 import prisma from "@/prisma.ts";
 import {hashPassword} from "@/services/password.service.ts";
-import {User} from "@prisma/client";
 import {passwordValidator} from "@/validators/password.validator.ts";
 
 function userValidation(data: SignUpDto) {
@@ -28,11 +27,6 @@ export async function createUser(data: SignUpDto) {
     const isUserExisted = await isUserExist(data);
 
     try {
-        // @ts-ignore
-        const newUser: User = {
-            ...data,
-        }
-
         const hash = await hashPassword(data.password);
         const {email, password, service, ...userData} = data
 
@@ -64,20 +58,23 @@ async function isUserExist(unique: SignUpDto) {
     const user = await prisma.user.findFirst({
         where: {
             OR: [
-                {phoneNumber: unique.phoneNumber},
+                {phoneNumber: unique.phoneNumber,},
                 {username: unique.username},
-                {
-                    Account: {
-                        some: {
-                            email: unique.email
-                        }
-                    }
-                }
+                {Account: {some: {email: unique.email}}}
             ]
         }
     })
+    if (user === null) return false;
 
-    return user != null
+    if (user.phoneNumber === unique.phoneNumber) throw new Error("Số điện thoại đã được sử dụng", {
+        cause: "PHONE_EXISTED"
+    });
+
+    if (user.username === unique.username) throw new Error("Tên người dùng đã được sử dụng", {
+        cause: "USERNAME_EXISTED"
+    });
+
+    return true;
 }
 
 async function isAccountExist(email: string) {
