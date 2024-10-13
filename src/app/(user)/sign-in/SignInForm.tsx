@@ -11,7 +11,7 @@ import {Service} from '@prisma/client';
 import {passwordValidator} from "@/validators/password.validator";
 import {IconKey, IconMail} from "@tabler/icons-react";
 import {signIn, SignInData} from "@/services/sign-in.service.ts";
-import {useSearchParams} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {parse} from "cookie";
 
 
@@ -23,6 +23,7 @@ const SignInForm = ({service}: SignInFormProps) => {
     const searchParams = useSearchParams();
     const searchParamString = searchParams.toString();
     const returnUrl = searchParams.get('returnUrl');
+    const router = useRouter();
 
 
     const [loading, {open, close}] = useDisclosure(false);
@@ -47,9 +48,11 @@ const SignInForm = ({service}: SignInFormProps) => {
         close();
         if (!res.ok) {
             setLoginStatus(await res.json())
+            return;
         } else {
             const cookies = parse(document.cookie);
             if (returnUrl) location.href = returnUrl + `?Token=${cookies.Token}`
+            router.push('/v1/me')
         }
     }
 
