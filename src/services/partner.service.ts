@@ -90,7 +90,8 @@ export async function getPartnerDto(partnerId: string) {
                     Service: true
                 }
             },
-            Account: true
+            Account: true,
+            Service: true
         }
     });
 
