@@ -14,7 +14,6 @@
 
 import type {NextRequest} from 'next/server'
 import {NextResponse} from 'next/server'
-import {jwtVerify} from "@/services/jwt.service.ts";
 
 
 /*const corsOptions = {
@@ -24,16 +23,6 @@ import {jwtVerify} from "@/services/jwt.service.ts";
 
 
 export async function middleware(request: NextRequest) {
-    const token = request.cookies.get('Token')?.value;
-    if (!token) {
-        return NextResponse.redirect(new URL('/sign-in', request.url))
-    }
-
-    const claim = await jwtVerify(token);
-    if (!claim) {
-        return NextResponse.redirect(new URL('/sign-in', request.url), )
-    }
-
     return NextResponse.next()
 }
 
