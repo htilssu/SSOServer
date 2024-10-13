@@ -91,10 +91,9 @@ model Service {
   updatedAt      DateTime         @updatedAt
   website        String?
   PartnerService PartnerService[]
-  Owner          Partner          @relation(fields: [partnerId], references: [id])
-  partnerId      String
+  partnerId      String?
+  Owner          Partner?         @relation(fields: [partnerId], references: [id])
 
-  @@index([partnerId])
   @@index([shortId])
 }
 
