@@ -7,6 +7,7 @@ import {jwtVerify} from "@/services/jwt.service.ts";
 import Image from "next/image";
 import React from "react";
 import SignInForm from "@/app/(user)/sign-in/SignInForm.tsx";
+import SubmitLoginToServiceForm from "./SubmitLoginToServiceForm.tsx";
 
 
 let searchParamsGlobal: { returnUrl: any; serviceId: any; };
