@@ -32,8 +32,7 @@ const SubmitLoginToServiceForm = ({account, service}: SubmitLoginFormProps) => {
             <h2 className={'text-xl text-start'}>Tiếp tục sử dụng tài khoản Oggy Club để đăng nhập vào {
                 service?.name
             }</h2>
-            <UserInfoCard user={account.User!}/>
-
+            {account.accountType === "user" && <UserInfoCard user={account.User!}/>}
             <SubmitOption accept={acceptLoginHandler} cancel={cancelLoginHandler}/>
         </div>
     );
