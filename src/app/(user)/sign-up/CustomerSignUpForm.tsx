@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState} from 'react';
-import {isEmail, isNotEmpty, useForm} from "@mantine/form";
+import {isEmail, useForm} from "@mantine/form";
 import {confirmPasswordValidator, passwordValidator} from "@/validators/password.validator.ts";
 import EmailInput from "@/components/EmailInput.tsx";
 import {Box, Button, Checkbox, InputWrapper, LoadingOverlay, PasswordInput, TextInput} from "@mantine/core";
@@ -13,6 +13,7 @@ import Link from "next/link";
 import {ErrorModel} from "@/dtos/error.model.ts";
 import {signUpUser} from "@/services/sign-up.service.ts";
 import {removeNullProperties} from "@/utils/object.util.ts";
+import {nameValidator} from "@/validators/user.validator.ts";
 
 const now = new Date();
 const maxDate = new Date(now.getFullYear() - minAge, now.getMonth(), now.getDate());
@@ -36,8 +37,8 @@ const CustomerSignUpForm = () => {
 
         validate: {
             password: passwordValidator,
-            lastName: isNotEmpty("Họ không được để trống"),
-            firstName: isNotEmpty("Tên không được để trống"),
+            lastName: nameValidator,
+            firstName: nameValidator,
             confirmPassword: confirmPasswordValidator,
             email: isEmail("Email không hợp lệ"),
             dob: dobValidator,
