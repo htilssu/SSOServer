@@ -3,6 +3,9 @@ const nextConfig = {
   pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
   experimental: {
     ppr: 'incremental',
+    serverActions: {
+      bodySizeLimit: '10mb',
+    }
   },
 };
 
