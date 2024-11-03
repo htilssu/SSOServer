@@ -18,8 +18,9 @@ import {useClickOutside} from "@mantine/hooks";
 import {useState} from "react";
 import {Avatar} from "@mantine/core";
 import {useRouter} from "next/navigation";
+import {Auth} from "@/services/auth.service.ts";
 
-function AuthSection({session}) {
+function AuthSection({session}: { session: Auth | null }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const ref = useClickOutside(() => setDropdownOpen(false));
     const router = useRouter();
