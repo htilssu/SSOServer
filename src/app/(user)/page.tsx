@@ -26,9 +26,10 @@ const Page = () => {
                             Dễ dàng đăng nhập các dịch vụ với tài khoản SSO
                         </h1>
                         <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                            Với tài khoản SSO của chúng tôi, bạn có thể nhanh chóng đăng nhập tới cách dịch vụ liên kết chỉ với 1 nút bấm.</p>
+                            Với tài khoản SSO của chúng tôi, bạn có thể nhanh chóng đăng nhập tới cách dịch vụ liên kết
+                            chỉ với 1 nút bấm.</p>
                         <Link href="/sign-in"
-                           className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-600">
+                              className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-600">
                             Đăng ký tài khoản
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +41,7 @@ const Page = () => {
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
                         <Image src={Shield} quality={100} priority={true}
-                             alt="mockup"/>
+                               alt="mockup"/>
                     </div>
                 </div>
             </section>

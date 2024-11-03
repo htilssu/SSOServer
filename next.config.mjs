@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
-  images: {},
+  experimental: {
+    ppr: 'incremental',
+  },
 };
 
 export default nextConfig;

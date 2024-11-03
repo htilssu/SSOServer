@@ -27,15 +27,8 @@ export async function saveTempSession(service: string) {
         redirect('/404')
     }
     const t = cuid2.createId();
-    await prisma.tempSession.create({
-        data: {
-            session: t,
-            expiredAt: new Date(Date.now() + expiredTime),
-            s: service
-        }
-    })
 
-    cookies().set('t', t, {
+    (await cookies()).set('t', t, {
         maxAge: expiredTime
     });
 

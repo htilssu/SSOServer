@@ -45,19 +45,15 @@ export async function createPartner(data: SignUpDto) {
             }
         });
         return {
-            ...await prisma.partner.findFirst({
+            ...await prisma.account.findFirst({
                 where: {
-                    Account: {
-                        some: {
-                            id: account.id
-                        }
-                    }
+                    id: account.id
                 },
                 include: {
-                    PartnerService: true
+                    Partner: true
                 }
             }),
-            email: account.email
+            password: undefined
         }
 
     } catch (e) {

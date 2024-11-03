@@ -12,7 +12,7 @@
  *  ******************************************************
  */
 
-const isContainNumberAndSpecialCharacterPattern = /\W|_|\d/g
+const isContainNumberAndSpecialCharacterPattern = /[^ a-zA-ZáàảãạâấầẩẫậăắằẳẵặêếềểễệíìỉĩịôốồổỗộơớờởỡợúùủũụưứừửữựÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶÊẾỀỂỄỆÍÌỈĨỊÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰ]/g
 
 export function nameValidator(name: string) {
     if (!name || name?.length === 0) return "Tên không được để trống";

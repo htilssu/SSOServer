@@ -31,7 +31,6 @@ export type TokenPayload = {
 export const jwtSign = async (payload: TokenPayload) => {
     return await new SignJWT({
             iss: 'https://sso.htilssu.id.vn',
-            sub: payload.id,
             ...payload
         }
     ).setExpirationTime(process.env.TOKEN_LIFETIME!)

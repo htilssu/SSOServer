@@ -56,6 +56,7 @@ export async function POST(request: NextRequest) {
     const token = await jwtSign(removeNullProperties({
         ...account.User,
         ...account.Partner,
+        sub: account.id,
         ...claim,
         role: account.accountType
     }));

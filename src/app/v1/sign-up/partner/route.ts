@@ -22,11 +22,13 @@ import {removeNullProperties} from "@/utils/object.util.ts";
 export async function POST(request: NextRequest) {
     const data: SignUpDto = await request.json();
     try {
-        const partner = await createPartner(data);
-        return NextResponse.json(partner, {
+        const account = await createPartner(data);
+        return NextResponse.json(account, {
             status: 200, headers: {
                 'Set-Cookie': `Token=${await jwtSign(removeNullProperties({
-                    ...partner,
+                    ...account,
+                    sub: account.id,
+                    ...account.Partner,
                     role: "partner"
                 }))}; HttpOnly; Path=/; SameSite=Strict; Max-Age=${expiredTimeInSecs};`
             }

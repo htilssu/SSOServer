@@ -18,13 +18,20 @@ export async function createUser(data: SignUpDto) {
     userValidation(data);
 
     const isAccountExisted = await isAccountExist(data.email);
+    const isUserExisted = await isUserExist(data);
+
     if (isAccountExisted) {
         throw new Error("Email này đã được sử dụng", {
             cause: "EMAIL_EXISTED"
         });
     }
 
-    const isUserExisted = await isUserExist(data);
+    if (isUserExisted) {
+        throw new Error("Thông tin đã được sử dụng", {
+            cause: "INFO_EXISTED"
+        });
+    }
+
 
     try {
         const hash = await hashPassword(data.password);
@@ -44,12 +51,15 @@ export async function createUser(data: SignUpDto) {
         })
 
         return {
-            ...prisma.user.findFirst({
+            ...prisma.account.findFirst({
                 where: {
-                    id: newAccount.userId!
+                    id: newAccount.id
                 },
+                include: {
+                    User: true
+                }
             }),
-            email: newAccount.email
+            password: undefined
         }
     } catch (e) {
         throw new Error("Đã có lỗi xảy ra");

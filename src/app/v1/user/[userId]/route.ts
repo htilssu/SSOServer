@@ -18,9 +18,13 @@ import prisma from "@/prisma.ts";
 import {USER_NOT_FOUND} from "@/exceptions/Error.ts";
 import {decodeJwt} from "@/utils/jwt.util.ts";
 
-export async function GET(request: NextRequest, {params}: {
-    params: { userId: string }
-}) {
+export async function GET(
+    request: NextRequest,
+    props: {
+        params: Promise<{ userId: string }>
+    }
+) {
+    const params = await props.params;
     const claim = decodeJwt(request);
     const role: string = claim?.role;
     const userId = claim?.id;

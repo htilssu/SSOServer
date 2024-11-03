@@ -1,35 +1,23 @@
-/*
- * ******************************************************
- *  * Copyright (c) 2024 htilssu
- *  *
- *  * This code is the property of htilssu. All rights reserved.
- *  * Redistribution or reproduction of any part of this code
- *  * in any form, with or without modification, is strictly
- *  * prohibited without prior written permission from the author.
- *  *
- *  * Author: htilssu
- *  * Created: 11-10-2024
- *  ******************************************************
- */
-
 import type {Metadata} from "next";
 import "../globals.css";
 import '@mantine/core/styles.css';
-import React from "react";
 import {MantineProvider} from "@mantine/core";
 import {Rubik} from "next/font/google";
-import Head from "next/head";
+import Navbar from "@/components/Navbar.tsx";
+import React from "react";
 
 
-export const metadata: Metadata = {
-    title: "SSO Service",
-    description: "Single Sign-On Service",
-    openGraph: {
-        title: "Single Sign On Service",
-        description: "Dịch vụ đăng nhập 1 lần của oggy club",
-        countryName: "VietNam",
-    }
-};
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "SSO Service",
+        description: "Single Sign-On Service",
+        openGraph: {
+            title: "Single Sign On Service",
+            description: "Dịch vụ đăng nhập 1 lần của oggy club",
+            countryName: "VietNam",
+        }
+    };
+}
 
 const rubik = Rubik({
     weight: ["300", "400", '500', '600'],
@@ -37,9 +25,7 @@ const rubik = Rubik({
     preload: true,
 })
 
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+export default async function RootLayout({children}: Readonly<{
     children: React.ReactNode;
 }>) {
 
@@ -49,6 +35,7 @@ export default function RootLayout({
             className={`${rubik.className} selection:text-white select-none selection:bg-sky-300 antialiased`}
         >
         <MantineProvider>
+            <Navbar/>
             {children}
         </MantineProvider>
         </body>

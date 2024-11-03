@@ -6,16 +6,17 @@ import {ErrorModel} from "@/dtos/error.model.ts";
 import {SignUpDto} from "@/services/sign-up.service.ts";
 
 
-
 export async function POST(request: NextRequest) {
     const body: SignUpDto = await request.json();
     if (!body.service || body.service === '') {
         try {
-            const user = await createUser(body);
-            return NextResponse.json(user, {
+            const account = (await createUser(body))!;
+            return NextResponse.json(account, {
                 status: 200, headers: {
                     'Set-Cookie': `Token=${await jwtSign(removeNullProperties({
-                        ...user,
+                        ...account,
+                        sub: account.id,
+                        ...account.User,
                         role: "user"
                     }))}; HttpOnly; Path=/; SameSite=Strict; Max-Age=${expiredTimeInSecs};`
                 }

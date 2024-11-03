@@ -20,7 +20,8 @@ import Image from "next/image";
 import Lonely from "../../../../../public/backgrounds/lonely.jpg"
 
 // @ts-ignore
-const Page = ({searchParams}) => {
+const Page = async props => {
+    const searchParams = await props.searchParams;
 
     if (!searchParams.token) redirect('/')
 
