@@ -24,7 +24,7 @@ const SubmitLoginToServiceForm = ({account, service}: SubmitLoginFormProps) => {
     }
 
     function cancelLoginHandler() {
-        location.href = returnUrl;
+        window.history.back();
     }
 
     return (
