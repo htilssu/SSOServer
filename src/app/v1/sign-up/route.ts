@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
                         sub: account.id,
                         ...account.User,
                         role: "user"
-                    }))}; HttpOnly; Path=/; SameSite=Strict; Max-Age=${expiredTimeInSecs};`
+                    }))}; Path=/; SameSite=Strict; Max-Age=${expiredTimeInSecs};`
                 }
             });
         } catch (e) {
