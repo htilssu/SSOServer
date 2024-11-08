@@ -41,7 +41,7 @@ const EditInformationForm = () => {
             </div>
             <Button onClick={() => {
                 formData.append('avatar', file as File);
-                uploadAvatar(file);
+                uploadAvatar(file!).then();
             }}>Save</Button>
         </div>
     );

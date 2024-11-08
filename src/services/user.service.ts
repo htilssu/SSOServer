@@ -71,7 +71,6 @@ async function isUserExist(unique: SignUpDto) {
     const user = await prisma.user.findFirst({
         where: {
             OR: [
-                {phoneNumber: unique.phoneNumber,},
                 {username: unique.username},
                 {Account: {some: {email: unique.email}}}
             ]
