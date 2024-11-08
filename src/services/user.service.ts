@@ -71,6 +71,7 @@ async function isUserExist(unique: SignUpDto) {
     const user = await prisma.user.findFirst({
         where: {
             OR: [
+                {phoneNumber: unique.phoneNumber},
                 {username: unique.username},
                 {Account: {some: {email: unique.email}}}
             ]
@@ -78,15 +79,16 @@ async function isUserExist(unique: SignUpDto) {
     })
     if (user === null) return false;
 
-    if (user.phoneNumber === unique.phoneNumber) throw new Error("Số điện thoại đã được sử dụng", {
-        cause: "PHONE_EXISTED"
-    });
+    if (unique?.phoneNumber.length !== 0 && user.phoneNumber === unique.phoneNumber) throw new Error(
+        "Số điện thoại đã được sử dụng", {
+            cause: "PHONE_EXISTED"
+        });
 
-    if (user.username === unique.username) throw new Error("Tên người dùng đã được sử dụng", {
+    if (unique?.username.length !== 0 && user.username === unique.username) throw new Error("Tên người dùng đã được sử dụng", {
         cause: "USERNAME_EXISTED"
     });
 
-    return true;
+    return false;
 }
 
 async function isAccountExist(email: string) {
