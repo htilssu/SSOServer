@@ -84,9 +84,10 @@ async function isUserExist(unique: SignUpDto) {
             cause: "PHONE_EXISTED"
         });
 
-    if (unique?.username.length !== 0 && user.username === unique.username) throw new Error("Tên người dùng đã được sử dụng", {
-        cause: "USERNAME_EXISTED"
-    });
+    if (unique?.username.length !== 0 && user.username === unique.username) throw new Error(
+        "Tên người dùng đã được sử dụng", {
+            cause: "USERNAME_EXISTED"
+        });
 
     return false;
 }
