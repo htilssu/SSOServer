@@ -8,27 +8,15 @@
  *  * prohibited without prior written permission from the author.
  *  *
  *  * Author: htilssu
- *  * Created: 12-10-2024
+ *  * Created: 8-11-2024
  *  ******************************************************
  */
 
 import {NextRequest, NextResponse} from "next/server";
 import {auth} from "@/services/auth.service.ts";
-import prisma from "@/prisma.ts";
 
 export async function GET(request: NextRequest) {
-    const user = await auth();
-    const authId = user?.id;
+    const authData = await auth();
 
-    const account = await prisma.account.findFirst({
-        where: {
-            id: authId
-        },
-        include: {
-            User: true,
-            Partner: true
-        },
-    })
-
-    return NextResponse.json({...account, password: undefined});
+    return NextResponse.json({...authData});
 }

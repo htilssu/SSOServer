@@ -18,11 +18,9 @@ import {jwtVerify} from "@/services/jwt.service.ts";
 
 export interface Auth {
     isAuthenticated: boolean,
-    payload: {
-        id: string,
-        role: string,
-        avatar?: string
-    }
+    id: string,
+    role: string,
+    avatar?: string
 }
 
 export async function auth(): Promise<Auth | null> {
@@ -38,10 +36,6 @@ export async function auth(): Promise<Auth | null> {
     if (!payload.id || !payload.role) return null;
     return {
         isAuthenticated: true,
-        payload: {
-            id: payload.sub!,
-            role: payload.role as string,
-            avatar: payload.avatar as string
-        }
-    }
+        ...payload
+    } as Auth;
 }

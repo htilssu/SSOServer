@@ -5,6 +5,7 @@ import {MantineProvider} from "@mantine/core";
 import {Rubik} from "next/font/google";
 import Navbar from "@/components/Navbar.tsx";
 import React from "react";
+import CacheProvider from "@/components/cache-provider.tsx";
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -32,12 +33,14 @@ export default async function RootLayout({children}: Readonly<{
     return (
         <html lang="en" suppressHydrationWarning={true}>
         <body
-            className={`${rubik.className} selection:text-white select-none selection:bg-sky-300 antialiased`}
+            className={`${rubik.className} selection:text-white bg-gray-900 select-none selection:bg-sky-300 antialiased`}
         >
-        <MantineProvider>
-            <Navbar/>
-            {children}
-        </MantineProvider>
+        <CacheProvider>
+            <MantineProvider>
+                <Navbar/>
+                {children}
+            </MantineProvider>
+        </CacheProvider>
         </body>
         </html>
     );

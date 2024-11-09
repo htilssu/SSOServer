@@ -16,6 +16,7 @@ import type {Metadata} from "next";
 import {Rubik} from "next/font/google";
 import {MantineProvider} from "@mantine/core";
 import React from "react";
+import CacheProvider from "@/components/cache-provider.tsx";
 
 export const metadata: Metadata = {
     title: "SSO Service",
@@ -39,7 +40,11 @@ async function Layout({children}: Readonly<{ children: React.ReactNode }>) {
         <body
             className={`${rubik.className} selection:text-white select-none selection:bg-sky-300 antialiased`}
         >
-            {children}
+        <CacheProvider>
+            <MantineProvider>
+                {children}
+            </MantineProvider>
+        </CacheProvider>
         </body>
         </html>
     );

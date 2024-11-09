@@ -38,7 +38,7 @@ function AuthSection({session}: { session: Auth | null }) {
 
     return (
         <div>
-            {session?.isAuthenticated ? (<Avatar src={session.payload.avatar} onClick={toggleDropdown}/>) : (
+            {session?.isAuthenticated ? (<Avatar src={session?.avatar} onClick={toggleDropdown}/>) : (
                 <Link className={"text-white hover:bg-gray-700 hover:text-white px-3 py-3 rounded-md"} href={"/sign-in"}
                 >
                     Đăng nhập

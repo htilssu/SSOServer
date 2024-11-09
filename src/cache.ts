@@ -8,20 +8,10 @@
  *  * prohibited without prior written permission from the author.
  *  *
  *  * Author: htilssu
- *  * Created: 1-11-2024
+ *  * Created: 9-11-2024
  *  ******************************************************
  */
-import React from 'react';
-import EditInformationForm from './EditInformationForm';
 
-const Page = () => {
+import {QueryClient} from "@tanstack/react-query";
 
-
-    return (
-        <div>
-            <EditInformationForm/>
-        </div>
-    );
-};
-
-export default Page;
+export const queryClient = new QueryClient();

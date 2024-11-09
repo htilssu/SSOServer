@@ -18,7 +18,7 @@ import '@mantine/core/styles.css';
 import React from "react";
 import {MantineProvider} from "@mantine/core";
 import {Rubik} from "next/font/google";
-import Navbar from "@/components/Navbar.tsx";
+import CacheProvider from "@/components/cache-provider.tsx";
 
 
 export const metadata: Metadata = {
@@ -48,9 +48,11 @@ export default function RootLayout({
         <body
             className={`${rubik.className} selection:text-white select-none selection:bg-sky-300 antialiased`}
         >
-        <MantineProvider>
-            {children}
-        </MantineProvider>
+        <CacheProvider>
+            <MantineProvider>
+                {children}
+            </MantineProvider>
+        </CacheProvider>
         </body>
         </html>
     );

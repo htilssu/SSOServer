@@ -16,7 +16,7 @@
  *  ******************************************************
  */
 
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {IconCamera} from "@tabler/icons-react";
 import {Button, FileInput} from "@mantine/core";
 import {uploadAvatar} from "@/services/image.service.ts";
