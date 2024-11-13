@@ -35,6 +35,7 @@ export async function createPartner(data: SignUpDto) {
                 email: data.email,
                 Partner: {
                     create: {
+                        name: data.name,
                         PartnerService: {
                             create: {
                                 serviceId: data.service

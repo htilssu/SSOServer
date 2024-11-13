@@ -22,8 +22,8 @@ export interface SignUpDto {
     phoneNumber: string;
     term: boolean;
     service: string;
+    name: string;
 }
-
 
 
 export async function signUpUser(data: SignUpDto) {
@@ -33,7 +33,7 @@ export async function signUpUser(data: SignUpDto) {
     })
 }
 
-export async function signUpPartner(data: SignUpDto){
+export async function signUpPartner(data: SignUpDto) {
     return await fetch("/v1/sign-up/partner", {
         method: "POST",
         body: JSON.stringify(data),
