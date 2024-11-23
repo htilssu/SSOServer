@@ -1,18 +1,18 @@
 'use client'
 
 import React, {useEffect, useState} from 'react';
-import EmailInput from "@/components/EmailInput";
+import EmailInput from "@/component/EmailInput";
 import {Button, Checkbox, PasswordInput} from "@mantine/core";
 import Link from "next/link";
 import {isEmail, useForm} from "@mantine/form";
 import {useDisclosure} from "@mantine/hooks";
-import {ErrorModel} from "@/dtos/error.model";
+import {ErrorModel} from "@/dto/error.model";
 import {Service} from '@prisma/client';
-import {passwordValidator} from "@/validators/password.validator";
+import {passwordValidator} from "@/validator/password.validator";
 import {IconKey, IconMail} from "@tabler/icons-react";
-import {signIn, SignInData} from "@/services/sign-in.service.ts";
+import {signIn, SignInData} from "@/service/sign-in.service.ts";
 import {useRouter, useSearchParams} from "next/navigation";
-import {redirectByReturnUrl} from "@/utils/redirect.util.ts";
+import {redirectByReturnUrl} from "@/util/redirect.util.ts";
 
 
 interface SignInFormProps {

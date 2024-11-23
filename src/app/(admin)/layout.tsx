@@ -16,7 +16,7 @@ import type {Metadata} from "next";
 import {Rubik} from "next/font/google";
 import {MantineProvider} from "@mantine/core";
 import React from "react";
-import CacheProvider from "@/components/cache-provider.tsx";
+import CacheProvider from "@/component/cache-provider.tsx";
 
 export const metadata: Metadata = {
     title: "SSO Service",

@@ -1,6 +1,6 @@
 import prisma from "@/prisma.ts";
-import {hashPassword} from "@/services/password.service.ts";
-import {passwordValidator} from "@/validators/password.validator.ts";
+import {hashPassword} from "@/service/password.service.ts";
+import {passwordValidator} from "@/validator/password.validator.ts";
 import {SignUpDto} from "./sign-up.service";
 
 function userValidation(data: SignUpDto) {

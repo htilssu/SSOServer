@@ -13,7 +13,7 @@
  */
 
 import {NextRequest, NextResponse} from "next/server";
-import {auth} from "@/services/auth.service.ts";
+import {auth} from "@/service/auth.service.ts";
 
 export async function GET(request: NextRequest) {
     const authData = await auth();

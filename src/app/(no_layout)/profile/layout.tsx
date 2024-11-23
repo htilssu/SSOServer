@@ -12,10 +12,10 @@
  *  ******************************************************
  */
 "use client"
-import {AppSidebar} from "@/components/app-sidebar.tsx";
-import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar.tsx";
-import {Separator} from "@/components/ui/separator.tsx";
-import useAuth from "@/hooks/useAuth.tsx";
+import {AppSidebar} from "@/component/app-sidebar.tsx";
+import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/component/ui/sidebar.tsx";
+import {Separator} from "@/component/ui/separator.tsx";
+import useAuth from "@/hook/useAuth.tsx";
 import React from "react";
 
 const Layout = ({

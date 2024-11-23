@@ -1,9 +1,9 @@
 import {NextRequest, NextResponse} from "next/server";
-import {createUser} from "@/services/user.service.ts";
-import {expiredTimeInSecs, jwtSign} from "@/services/jwt.service.ts";
-import {removeNullProperties} from "@/utils/object.util.ts";
-import {ErrorModel} from "@/dtos/error.model.ts";
-import {SignUpDto} from "@/services/sign-up.service.ts";
+import {createUser} from "@/service/user.service.ts";
+import {expiredTimeInSecs, jwtSign} from "@/service/jwt.service.ts";
+import {removeNullProperties} from "@/util/object.util.ts";
+import {ErrorModel} from "@/dto/error.model.ts";
+import {SignUpDto} from "@/service/sign-up.service.ts";
 
 
 export async function POST(request: NextRequest) {

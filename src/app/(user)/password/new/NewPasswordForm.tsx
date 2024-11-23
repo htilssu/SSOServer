@@ -16,9 +16,9 @@
 
 import {useDisclosure} from "@mantine/hooks";
 import React, {useState} from "react";
-import {ErrorModel} from "@/dtos/error.model.ts";
+import {ErrorModel} from "@/dto/error.model.ts";
 import {useForm} from "@mantine/form";
-import {confirmPasswordValidator, passwordValidator} from "@/validators/password.validator.ts";
+import {confirmPasswordValidator, passwordValidator} from "@/validator/password.validator.ts";
 import {IconKey} from "@tabler/icons-react";
 import {Button, LoadingOverlay, PasswordInput} from "@mantine/core";
 

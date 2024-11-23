@@ -15,8 +15,8 @@
 import cuid2 from "@paralleldrive/cuid2";
 import {cookies} from "next/headers";
 import prisma from "@/prisma.ts";
-import {isExpired} from "@/utils/time.util.ts";
-import {isServiceExist} from "@/services/service.service.ts";
+import {isExpired} from "@/util/time.util.ts";
+import {isServiceExist} from "@/service/service.service.ts";
 import {redirect} from "next/navigation";
 
 const expiredTime = 1000 * 60 * 10;

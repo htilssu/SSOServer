@@ -2,19 +2,19 @@
 
 import React, {useState} from 'react';
 import {isEmail, useForm} from "@mantine/form";
-import {confirmPasswordValidator, passwordValidator} from "@/validators/password.validator.ts";
-import EmailInput from "@/components/EmailInput.tsx";
+import {confirmPasswordValidator, passwordValidator} from "@/validator/password.validator.ts";
+import EmailInput from "@/component/EmailInput.tsx";
 import {Box, Button, Checkbox, InputWrapper, LoadingOverlay, PasswordInput, TextInput} from "@mantine/core";
 import {DateInput} from '@mantine/dates';
-import {dobValidator, maxAge, minAge} from "@/validators/dob.validator.ts";
+import {dobValidator, maxAge, minAge} from "@/validator/dob.validator.ts";
 import {useDisclosure} from "@mantine/hooks";
 import {IconAt, IconCalendar, IconKey} from "@tabler/icons-react";
 import Link from "next/link";
-import {ErrorModel} from "@/dtos/error.model.ts";
-import {signUpUser} from "@/services/sign-up.service.ts";
-import {removeNullProperties} from "@/utils/object.util.ts";
-import {nameValidator} from "@/validators/user.validator.ts";
-import {redirectByReturnUrl} from "@/utils/redirect.util.ts";
+import {ErrorModel} from "@/dto/error.model.ts";
+import {signUpUser} from "@/service/sign-up.service.ts";
+import {removeNullProperties} from "@/util/object.util.ts";
+import {nameValidator} from "@/validator/user.validator.ts";
+import {redirectByReturnUrl} from "@/util/redirect.util.ts";
 import {useRouter} from "next/navigation";
 
 const now = new Date();

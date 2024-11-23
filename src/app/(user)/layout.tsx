@@ -3,9 +3,9 @@ import "../globals.css";
 import '@mantine/core/styles.css';
 import {MantineProvider} from "@mantine/core";
 import {Rubik} from "next/font/google";
-import Navbar from "@/components/Navbar.tsx";
+import Navbar from "@/component/Navbar.tsx";
 import React from "react";
-import CacheProvider from "@/components/cache-provider.tsx";
+import CacheProvider from "@/component/cache-provider.tsx";
 
 
 export async function generateMetadata(): Promise<Metadata> {

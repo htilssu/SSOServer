@@ -1,11 +1,11 @@
 'use client'
 
 import React, {useState} from 'react';
-import EmailInput from "@/components/EmailInput.tsx";
+import EmailInput from "@/component/EmailInput.tsx";
 import {Button} from "@mantine/core";
 import {isEmail, useForm} from "@mantine/form";
 import {useDisclosure} from "@mantine/hooks";
-import {ErrorModel} from "@/dtos/error.model.ts";
+import {ErrorModel} from "@/dto/error.model.ts";
 import {Service} from '@prisma/client';
 import {IconMail} from "@tabler/icons-react";
 

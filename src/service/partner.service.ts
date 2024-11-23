@@ -12,9 +12,9 @@
  *  ******************************************************
  */
 
-import {SignUpDto} from "@/services/sign-up.service.ts";
+import {SignUpDto} from "@/service/sign-up.service.ts";
 import prisma from "@/prisma.ts";
-import {hashPassword} from "@/services/password.service.ts";
+import {hashPassword} from "@/service/password.service.ts";
 
 export async function createPartner(data: SignUpDto) {
     const isPartnerExisted = await isPartnerAccountExist(data.email);

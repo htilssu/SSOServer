@@ -1,14 +1,14 @@
 'use server'
 
-import Neon from '@@/backgrounds/neon.png';
+import Neon from '@@/background/neon.png';
 import {cookies} from "next/headers";
 import prisma from "@/prisma";
-import {jwtVerify} from "@/services/jwt.service.ts";
+import {jwtVerify} from "@/service/jwt.service.ts";
 import Image from "next/image";
 import React from "react";
 import SignInForm from "@/app/(no_layout)/sign-in/SignInForm.tsx";
 import SubmitLoginToServiceForm from "./SubmitLoginToServiceForm.tsx";
-import {SearchParams} from "@/utils/dynamic.util.ts";
+import {SearchParams} from "@/util/dynamic.util.ts";
 
 
 // @ts-ignore

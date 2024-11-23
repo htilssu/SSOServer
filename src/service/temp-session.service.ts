@@ -12,9 +12,9 @@
  *  ******************************************************
  */
 'use server'
-import {saveTempSession} from "@/services/return-url.service.ts";
+import {saveTempSession} from "@/service/return-url.service.ts";
 import {redirect} from "next/navigation";
-import {isServiceExist} from "@/services/service.service.ts";
+import {isServiceExist} from "@/service/service.service.ts";
 
 export async function setTempSession(service: string) {
     'use server'

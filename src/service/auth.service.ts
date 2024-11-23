@@ -14,7 +14,7 @@
 
 import {headers} from "next/headers";
 import {parse} from "cookie";
-import {jwtVerify} from "@/services/jwt.service.ts";
+import {jwtVerify} from "@/service/jwt.service.ts";
 
 export interface Auth {
     isAuthenticated: boolean,

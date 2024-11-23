@@ -5,7 +5,7 @@ import '@mantine/dates/styles.css';
 import prisma from "@/prisma.ts";
 import {Service} from "@prisma/client";
 import Image from "next/image";
-import Nano from "@@/backgrounds/neon.png"
+import Nano from "@@/background/neon.png"
 import PartnerSignUpForm from './PartnerSignUpForm.tsx';
 import {cookies} from "next/headers";
 

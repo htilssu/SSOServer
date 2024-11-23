@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {jwtVerify} from "@/services/jwt.service.ts";
+import {jwtVerify} from "@/service/jwt.service.ts";
 
 
 export async function GET(request: NextRequest) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from "next/image";
-import Field from "../../../../../public/backgrounds/field.png"
+import Field from "@@/background/field.png"
 import ForgotPasswordForm from "@/app/(user)/password/forgot/ForgotPasswordForm.tsx";
 
 const Page = () => {

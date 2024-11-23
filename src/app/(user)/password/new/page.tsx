@@ -17,7 +17,7 @@ import prisma from "@/prisma.ts";
 import {redirect} from "next/navigation";
 import NewPasswordForm from "@/app/(user)/password/new/NewPasswordForm.tsx";
 import Image from "next/image";
-import Lonely from "../../../../../public/backgrounds/lonely.jpg"
+import Lonely from "@@/background/lonely.jpg"
 
 // @ts-ignore
 const Page = async props => {

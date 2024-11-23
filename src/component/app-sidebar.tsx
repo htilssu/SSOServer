@@ -3,10 +3,10 @@
 import * as React from "react"
 import {LockIcon, UsersIcon,} from "lucide-react"
 
-import {NavMain} from "@/components/nav-main"
-import {NavProjects} from "@/components/nav-projects"
-import {NavSecondary} from "@/components/nav-secondary"
-import {NavUser} from "@/components/nav-user"
+import {NavMain} from "@/component/nav-main"
+import {NavProjects} from "@/component/nav-projects"
+import {NavSecondary} from "@/component/nav-secondary"
+import {NavUser} from "@/component/nav-user"
 import {
     Sidebar,
     SidebarContent,
@@ -15,8 +15,8 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import useAuth from "@/hooks/useAuth"
+} from "@/component/ui/sidebar"
+import useAuth from "@/hook/useAuth"
 
 const data = {
     navMain: [

@@ -11,7 +11,7 @@
  *  * Created: 11-10-2024
  *  ******************************************************
  */
-import {ErrorModel} from "@/dtos/error.model.ts";
+import {ErrorModel} from "@/dto/error.model.ts";
 
 export const USER_NOT_FOUND = new ErrorModel("USER_NOT_FOUND", "Người dùng không tồn tại", -1);
 export const WRONG_PASSWORD = new ErrorModel("WRONG_PASSWORD", "Mật khẩu không đúng!", -1);

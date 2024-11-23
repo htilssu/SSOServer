@@ -2,7 +2,7 @@
 
 import {PutObjectCommand} from "@aws-sdk/client-s3";
 import client from "@/s3client.ts";
-import {auth} from "@/services/auth.service.ts";
+import {auth} from "@/service/auth.service.ts";
 
 const BUCKET_NAME = process.env.S3_BUCKET;
 if (!BUCKET_NAME) throw new Error("Missing required environment variable for S3 configuration");

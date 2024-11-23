@@ -12,8 +12,8 @@
  *  ******************************************************
  */
 import Link from "next/link";
-import AuthSection from "@/components/AuthSection.tsx";
-import {auth} from "@/services/auth.service.ts";
+import AuthSection from "@/component/AuthSection.tsx";
+import {auth} from "@/service/auth.service.ts";
 
 export const experimental_ppr = true;
 

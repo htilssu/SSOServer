@@ -2,7 +2,7 @@ import React from 'react';
 import '@mantine/dates/styles.css';
 import CustomerSignUpForm from "@/app/(no_layout)/sign-up/CustomerSignUpForm.tsx";
 import Image from "next/image";
-import Neon from '@@/backgrounds/neon.png';
+import Neon from '@@/background/neon.png';
 
 
 const Page = async () => {

@@ -19,7 +19,7 @@
 import React, {useRef, useState} from 'react';
 import {IconCamera} from "@tabler/icons-react";
 import {Button, FileInput} from "@mantine/core";
-import {uploadAvatar} from "@/services/image.service.ts";
+import {uploadAvatar} from "@/service/image.service.ts";
 
 const EditInformationForm = () => {
     const avtInput = useRef<HTMLButtonElement>(null);

@@ -12,7 +12,7 @@
  *  ******************************************************
  */
 
-import {wGet} from "@/utils/request.util.ts";
+import {wGet} from "@/util/request.util.ts";
 
 export async function getUserInfo() {
     return await wGet('/v1/me');

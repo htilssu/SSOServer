@@ -18,7 +18,7 @@ import '@mantine/core/styles.css';
 import React from "react";
 import {MantineProvider} from "@mantine/core";
 import {Rubik} from "next/font/google";
-import CacheProvider from "@/components/cache-provider.tsx";
+import CacheProvider from "@/component/cache-provider.tsx";
 
 
 export const metadata: Metadata = {

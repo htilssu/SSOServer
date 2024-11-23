@@ -1,9 +1,9 @@
 import {NextRequest, NextResponse} from "next/server";
-import {expiredTimeInSecs, jwtSign} from "@/services/jwt.service.ts";
-import {verifyPassword} from "@/services/password.service.ts";
+import {expiredTimeInSecs, jwtSign} from "@/service/jwt.service.ts";
+import {verifyPassword} from "@/service/password.service.ts";
 import prisma from "@/prisma";
-import {removeNullProperties} from "@/utils/object.util.ts";
-import {USER_NOT_FOUND, WRONG_PASSWORD} from "@/exceptions/Error.ts";
+import {removeNullProperties} from "@/util/object.util.ts";
+import {USER_NOT_FOUND, WRONG_PASSWORD} from "@/exception/Error.ts";
 
 export type SignInBody = {
     email: string

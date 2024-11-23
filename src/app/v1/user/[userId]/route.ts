@@ -13,10 +13,10 @@
  */
 
 import {NextRequest, NextResponse} from "next/server";
-import {ErrorModel} from "@/dtos/error.model.ts";
+import {ErrorModel} from "@/dto/error.model.ts";
 import prisma from "@/prisma.ts";
-import {USER_NOT_FOUND} from "@/exceptions/Error.ts";
-import {decodeJwt} from "@/utils/jwt.util.ts";
+import {USER_NOT_FOUND} from "@/exception/Error.ts";
+import {decodeJwt} from "@/util/jwt.util.ts";
 
 export async function GET(
     request: NextRequest,

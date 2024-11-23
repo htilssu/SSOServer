@@ -13,7 +13,7 @@
  */
 
 import {NextResponse} from "next/server";
-import {jwk} from "@/services/jwt.service.ts";
+import {jwk} from "@/service/jwt.service.ts";
 
 export async function GET(request: Request) {
     const {searchParams} = new URL(request.url);
