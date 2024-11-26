@@ -26,17 +26,12 @@ const corsOptions = {
 const isAllowedOrigin = true;
 
 export async function middleware(request: NextRequest) {
-    const isPreflight = request.method === 'OPTIONS'
+    const response = NextResponse.next();
 
-    if (isPreflight) {
-        const preflightHeaders = {
-            ...(isAllowedOrigin && {'Access-Control-Allow-Origin': origin}),
-            ...corsOptions,
-        }
-        return NextResponse.json({}, {headers: preflightHeaders})
-    }
+    response.headers.set('Access-Control-Allow-Origin', "*")
+    response.headers.set('Access-Control-Allow-Methods', "*")
 
-    return NextResponse.next()
+    return response
 }
 
 export const config = {
