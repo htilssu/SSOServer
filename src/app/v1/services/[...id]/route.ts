@@ -18,9 +18,16 @@ export async function GET(request: NextRequest, {params}: { params: Promise<{ id
     const pr = await params;
 
     const id = pr.id[0];
-    const service = await prisma.service.findUnique({
+    const service = await prisma.service.findFirst({
         where: {
-            id: id
+            OR: [
+                {
+                    id: id
+                },
+                {
+                    shortId: id
+                }
+            ]
         }
     });
 
