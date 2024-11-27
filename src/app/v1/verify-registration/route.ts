@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
         expectedOrigin: 'https://wowo.htilssu.id.vn',
         expectedRPID: 'wowo.htilssu.id.vn',
     });
-    if (!verify.verified)  return NextResponse.json({}, {
+    if (!verify.verified)  return NextResponse.json({ message: 'User not found'}, {
         status: 400,
     })
 
