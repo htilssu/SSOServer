@@ -21,7 +21,9 @@ export async function GET(request: NextRequest) {
     const cookieStore = await cookies()
     const userId = cookieStore.get('userId');
     if (!userId) {
-        return NextResponse.error()
+        return NextResponse.next({
+            status: 400,
+        })
     }
     const optionsJSON = await generateRegistrationOptionsForUser(userId?.value, `${userId?.value}`);
 

@@ -21,6 +21,11 @@ import {AuthenticatorTransportFuture} from "@simplewebauthn/typescript-types";
 export async function POST(request: NextRequest) {
     const cookieStore = await cookies();
     const userId = cookieStore.get('userId');
+    if (!userId) {
+        return NextResponse.next({
+            status: 400,
+        });
+    }
     const data = await request.json();
     const verify = await verifyRegistrationResponse({
         response: data,
@@ -30,7 +35,9 @@ export async function POST(request: NextRequest) {
         expectedOrigin: 'https://wowo.htilssu.id.vn',
         expectedRPID: 'wowo.htilssu.id.vn',
     });
-    if (!verify.verified) return NextResponse.error();
+    if (!verify.verified) return NextResponse.next({
+        status: 400,
+    });
 
     await saveCredential(userId?.value!, verify.registrationInfo!.credential.transports!,
         verify.registrationInfo!.credential.id,
