@@ -22,11 +22,17 @@ export async function GET(request: NextRequest) {
     const cookieStore = await cookies();
     const userId = cookieStore.get('userId');
     if (!userId) {
-        return NextResponse.json({ message: 'User not found'}, {
+        return NextResponse.json({message: 'User not found'}, {
             status: 400,
         })
     }
     const optionsJSON = await generateAuthenticationOptionsForUser(userId?.value!);
+
+    if (optionsJSON.allowCredentials?.length === 0) {
+        return NextResponse.json({message: 'User not found'}, {
+            status: 400,
+        })
+    }
 
     return NextResponse.json(optionsJSON);
 }
