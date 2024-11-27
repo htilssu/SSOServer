@@ -15,7 +15,6 @@
 
 import {NextRequest, NextResponse} from "next/server";
 
-const allowedOrigins = ['https://wowo.htilssu.id.vn', 'https://my-app.org']
 
 const corsOptions = {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -25,7 +24,7 @@ const corsOptions = {
 
 export function middleware(request: NextRequest) {
     // Check the origin from the request
-    const origin = request.headers.get('origin') ?? ''
+    const origin = request.headers.get('Origin') ?? ''
     const isAllowedOrigin = true
 
     // Handle preflighted requests
@@ -33,10 +32,10 @@ export function middleware(request: NextRequest) {
 
     if (isPreflight) {
         const preflightHeaders = {
-            ...(isAllowedOrigin && { 'Access-Control-Allow-Origin': '*' }),
+            ...(isAllowedOrigin && {'Access-Control-Allow-Origin': origin}),
             ...corsOptions,
         }
-        return NextResponse.json({}, { headers: preflightHeaders })
+        return NextResponse.json({}, {headers: preflightHeaders})
     }
 
     // Handle simple requests
