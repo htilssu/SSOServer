@@ -20,6 +20,7 @@ const allowedOrigins = ['https://wowo.htilssu.id.vn', 'https://my-app.org']
 const corsOptions = {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Credentials': 'true',
 }
 
 export function middleware(request: NextRequest) {
