@@ -27,19 +27,21 @@ export async function POST(request: NextRequest) {
         expectedChallenge: (challenge) => {
             return true
         },
-        expectedOrigin: 'http://localhost:3000',
-        expectedRPID: 'localhost',
+        expectedOrigin: 'https://wowo.htilssu.id.vn',
+        expectedRPID: 'wowo.htilssu.id.vn',
     });
     if (!verify.verified) return NextResponse.error();
 
-    await saveCredential(userId?.value!, verify.registrationInfo!.credential.transports!, verify.registrationInfo!.credential.id,
+    await saveCredential(userId?.value!, verify.registrationInfo!.credential.transports!,
+        verify.registrationInfo!.credential.id,
         Buffer.from(verify.registrationInfo!.credential.publicKey));
 
     return NextResponse.json(verify);
 }
 
 
-async function saveCredential(userId: string, transport: AuthenticatorTransportFuture[], externalId: string, publicKey: Buffer) {
+async function saveCredential(userId: string, transport: AuthenticatorTransportFuture[], externalId: string,
+                              publicKey: Buffer) {
     try {
         return await prisma.credential.create({
             data: {

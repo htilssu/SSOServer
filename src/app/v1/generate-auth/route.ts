@@ -17,7 +17,6 @@ import {NextRequest, NextResponse} from "next/server";
 import {generateAuthenticationOptions} from '@simplewebauthn/server';
 import prisma from "@/prisma.ts";
 import {cookies} from "next/headers";
-import {PublicKeyCredentialRequestOptionsJSON} from "@simplewebauthn/typescript-types";
 
 export async function GET(request: NextRequest) {
     const cookieStore = await cookies();
@@ -30,7 +29,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(optionsJSON);
 }
 
-export async function generateAuthenticationOptionsForUser(userId: string): Promise<PublicKeyCredentialRequestOptionsJSON> {
+async function generateAuthenticationOptionsForUser(userId: string) {
     const credentials = await prisma.credential.findMany(
         {
             where: {
@@ -40,7 +39,7 @@ export async function generateAuthenticationOptionsForUser(userId: string): Prom
     )
 
     return generateAuthenticationOptions({
-        rpID: 'localhost',
+        rpID: 'wowo.htilssu.id.vn',
         timeout: 60000,
         userVerification: 'preferred',
         // @ts-ignore
