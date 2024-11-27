@@ -22,8 +22,8 @@ export async function GET(request: NextRequest) {
     const cookieStore = await cookies();
     const userId = cookieStore.get('userId');
     if (!userId) {
-        return NextResponse.next({
-            status: 400
+        return NextResponse.json({}, {
+            status: 400,
         })
     }
     const optionsJSON = await generateAuthenticationOptionsForUser(userId?.value!);
