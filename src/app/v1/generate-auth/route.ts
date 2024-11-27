@@ -11,13 +11,13 @@
  *  * Created: 27-11-2024
  *  ******************************************************
  */
+'use server'
 
 import {NextRequest, NextResponse} from "next/server";
 import {generateAuthenticationOptions} from '@simplewebauthn/server';
-import type {PublicKeyCredentialRequestOptionsJSON} from '@simplewebauthn/typescript-types';
 import prisma from "@/prisma.ts";
 import {cookies} from "next/headers";
-
+import {PublicKeyCredentialRequestOptionsJSON} from "@simplewebauthn/typescript-types";
 
 export async function GET(request: NextRequest) {
     const cookieStore = await cookies();
@@ -25,17 +25,16 @@ export async function GET(request: NextRequest) {
     if (!userId) {
         return NextResponse.error();
     }
-    const optionsJSON = await generateAuthenticationOptionsForUser(userId?.value);
+    const optionsJSON = await generateAuthenticationOptionsForUser(userId?.value!);
 
     return NextResponse.json(optionsJSON);
 }
 
-
-export async function generateAuthenticationOptionsForUser(userIdd: string): Promise<PublicKeyCredentialRequestOptionsJSON> {
+export async function generateAuthenticationOptionsForUser(userId: string): Promise<PublicKeyCredentialRequestOptionsJSON> {
     const credentials = await prisma.credential.findMany(
         {
             where: {
-                userId: userIdd
+                userId: userId
             }
         }
     )
@@ -44,9 +43,10 @@ export async function generateAuthenticationOptionsForUser(userIdd: string): Pro
         rpID: 'localhost',
         timeout: 60000,
         userVerification: 'preferred',
+        // @ts-ignore
         allowCredentials: credentials.map(cre => ({
             id: cre.externalId,
-            transports: cre.transport,
+            transports: cre.transport as AuthenticatorTransport[],
         })), // Add existing credentials to allow if any
     });
 }
