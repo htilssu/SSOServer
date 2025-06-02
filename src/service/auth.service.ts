@@ -12,30 +12,80 @@
  *  ******************************************************
  */
 
-import {headers} from "next/headers";
-import {parse} from "cookie";
-import {jwtVerify} from "@/service/jwt.service.ts";
+import { jwtVerify } from "@/service/jwt.service.ts";
+import { cookies } from "next/headers";
 
+/**
+ * Interface định nghĩa thông tin xác thực người dùng
+ */
 export interface Auth {
-    isAuthenticated: boolean,
-    id: string,
-    role: string,
-    avatar?: string
+  isAuthenticated: boolean;
+  sub: string;
+  email: string;
+  accountType: string;
+  user?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    username?: string;
+    roles: string[];
+  };
+  partner?: {
+    id: string;
+    name?: string;
+    services: Array<{
+      id: string;
+      name: string;
+    }>;
+  };
 }
 
+/**
+ * Lấy thông tin xác thực từ JWT token
+ * @returns Promise<Auth | null> - Thông tin xác thực hoặc null nếu không hợp lệ
+ */
 export async function auth(): Promise<Auth | null> {
-    const header = await headers();
-    const cookie = header.get('Cookie');
-    if (!cookie) return null;
-    const dictCookie = parse(cookie);
-    const token = dictCookie.Token;
+  try {
+    const cookie = await cookies();
+    const token = cookie.get("Token");
+
     if (!token) return null;
-    const payload = await jwtVerify(token);
+
+    const payload = await jwtVerify(token.value);
     if (!payload) return null;
 
-    if (!payload.id || !payload.role) return null;
+    // Kiểm tra tính hợp lệ của payload
+    const { sub, email, accountType, user, partner } =
+      payload as unknown as Auth;
+
+    if (!sub || !email || !accountType) {
+      return null;
+    }
+
     return {
-        isAuthenticated: true,
-        ...payload
-    } as Auth;
+      isAuthenticated: true,
+      sub,
+      email,
+      accountType,
+      user: user
+        ? {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            username: user.username,
+            roles: user.roles,
+          }
+        : undefined,
+      partner: partner
+        ? {
+            id: partner.id,
+            name: partner.name,
+            services: partner.services,
+          }
+        : undefined,
+    };
+  } catch (error) {
+    console.error("Auth error:", error);
+    return null;
+  }
 }

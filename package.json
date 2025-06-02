@@ -17,6 +17,7 @@
     "@mantine/dates": "^7.13.2",
     "@mantine/form": "^7.13.2",
     "@mantine/hooks": "^7.13.2",
+    "@mantine/notifications": "^7.17.4",
     "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "5.21.1",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -34,7 +35,7 @@
     "@tanstack/react-query": "^5.59.20",
     "@tanstack/react-query-devtools": "^5.59.20",
     "@types/ms": "^0.7.34",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cookie": "^1.0.0",
@@ -45,7 +46,7 @@
     "jose": "^5.9.3",
     "lucide-react": "^0.454.0",
     "ms": "^2.1.3",
-    "next": "15.0.3-canary.4",
+    "next": "15.3.0-canary.44",
     "nodemailer": "^6.9.15",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-advanced-cropper": "^0.20.0",
@@ -86,7 +87,10 @@
     "overrides": {
       "@types/react": "npm:types-react@19.0.0-rc.1",
       "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
   },
   "packageManager": "pnpm@10.6.5+sha512.cdf928fca20832cd59ec53826492b7dc25dc524d4370b6b4adbf65803d32efaa6c1c88147c0ae4e8d579a6c9eec715757b50d4fa35eea179d868eada4ed043af"
 }

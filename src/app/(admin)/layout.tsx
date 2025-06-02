@@ -12,42 +12,30 @@
  *  ******************************************************
  */
 
-import type {Metadata} from "next";
-import {Rubik} from "next/font/google";
-import {MantineProvider} from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
+import { Rubik } from "next/font/google";
 import React from "react";
-import CacheProvider from "@/component/cache-provider.tsx";
+
+import type { Metadata } from "next";
+import AdminShell from "./AdminShell";
+import "@/app/globals.css";
+import "@mantine/core/styles.css";
+
+const rubik = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "SSO Service",
-    description: "Single Sign-On Service",
-    openGraph: {
-        title: "Single Sign On Service",
-        description: "Dịch vụ đăng nhập 1 lần của oggy club",
-        countryName: "VietNam",
-    }
+  title: "SSO Server",
+  description: "SSO Server for authentication and authorization",
 };
 
-const rubik = Rubik({
-    weight: ["300", "400", '500', '600'],
-    subsets: ['latin'],
-    preload: true,
-})
-
-async function Layout({children}: Readonly<{ children: React.ReactNode }>) {
-    return (
-        <html lang="en">
-        <body
-            className={`${rubik.className} selection:text-white select-none selection:bg-sky-300 antialiased`}
-        >
-        <CacheProvider>
-            <MantineProvider>
-                {children}
-            </MantineProvider>
-        </CacheProvider>
-        </body>
-        </html>
-    );
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body className={rubik.className}>
+        <MantineProvider>
+          <AdminShell>{children}</AdminShell>
+        </MantineProvider>
+      </body>
+    </html>
+  );
 }
-
-export default Layout;
